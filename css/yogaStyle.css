@@ -16,12 +16,12 @@ body {
 }
 
 .header {
+    font-weight: bolder;
     color: white;
     padding-left: 12px;
     flex: 1;
     text-align: center;
 }
-
 
 .form-div {
     /* background-color: #ff9b70; */
@@ -30,13 +30,13 @@ body {
     border-radius: 30px;
     background: #ffffffaf;
     /* box-shadow: 10px 10px 4px #0a040183, -10px -10px 4px #ffffff; */
-    box-shadow: 7px 7px 14px #00000093, -7px -7px 14px #ffffff;
+    box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.2);
     /* display: grid;
     justify-self: center;
     align-self: center; */
 }
 
-label{
+label {
     font-size: 20px;
     font-weight: bold;
 }
@@ -51,5 +51,7 @@ label{
 .submit-btn {
     background-color: #FA9B70;
     border-radius: 50px;
-    color: white
+    padding-right: 140px;
+    color: white;
+    font-weight: bolder;
 }
