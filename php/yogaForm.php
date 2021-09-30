@@ -17,6 +17,7 @@
 <body>
     <?php
     $durationErr = "";
+    $yogaErr = "";
     $duration = "";
     $rating = "";
     $yoga = "";
@@ -27,13 +28,22 @@
         } else if (preg_match("/^[a-zA-Z]*$/", $_POST["duration"])) {
             // echo "<span style='color:red;'>Duration cannot be letter</span><br>";
             $durationErr = "Duration cannot be letter";
-        } else {
+        }
+        else if((int)($_POST["duration"])<=0){
+            $durationErr = "Duration should be greater than 0";
+        }
+        else {
             $duration = $_POST["duration"];
         }
 
+        if(empty($_POST["yogaAsan"])) {
+            $yogaErr = "Please select an Asana";
+        }
+        else{
+            $yoga = $_POST["yogaAsan"];
+        }
 
         $rating = $_POST["exerciseRate"];
-        $yoga = $_POST["yogaAsan"];
     }
     ?>
 
@@ -56,10 +66,16 @@
                     <label for="yogaAsan" class="col-4 mx-5">Select Yoga Asan: </label>
                     <div class="col-5 mx-5">
                         <select class="form-select" name="yogaAsan">
+                            <option value="">SELECT</option>
                             <option value="SIRSASANA">HEADSTAND - SIRSASANA</option>
                             <option value="HALASANA">PLOUGH - HALASANA</option>
                             <option value="MATSYASANA">FISH - MATSYASANA</option>
                         </select>
+                        <?php
+                        if ($durationErr != "") {
+                            echo '<small id="durationHelp" class="form-text" style="color: #FF2226">' . $yogaErr . '</small>';
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="row form-group my-3">
@@ -103,8 +119,11 @@
                     <div class="col"></div>
                     <div class="col">
                         <?php
-                        if ($duration != "") {
-                            echo '<span>' . $duration . $yoga . $rating . '</span>';
+                        if ($duration && $yoga && $rating) {
+                            echo '<span> Duration: ' . $duration ." mins<br>Yoga: ". $yoga ."<br>Rating: ". $rating .'<br></span>';
+                        }
+                        else{
+                            echo '<span> Invalid Inputs Entered </span>';
                         }
                         ?>
                     </div>
