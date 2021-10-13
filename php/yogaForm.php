@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Athleap: Yoga Form</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/yogaStyle.css">
-    <link href="../fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    <link href="../bootstrap-5.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/yogaStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -33,29 +33,18 @@
         } else {
             $duration = $_POST["duration"];
         }
-
         if (empty($_POST["yogaAsan"])) {
             $yogaErr = "Please select an Asana";
         } else {
             $yoga = $_POST["yogaAsan"];
         }
-
         $rating = $_POST["exerciseRate"];
     }
     ?>
-
     <div class="top-section">
         <a href="#" class="back"><i class="fas fa-bars fa-lg" style="color:white"></i></a>
         <h2 class="header">Today's Workout</h2>
     </div>
-
-    <!-- <div class="container text-center">
-        <h1>
-            Yoga Form
-        </h1>
-        <span>Your Yoga Status</span>
-    </div> -->
-
     <div class="form-container">
         <div class="form-div mt-5 pt-5">
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="pt-2">
@@ -127,10 +116,10 @@
                     </div>
                     <div class="col"></div>
                 </div>
-
             </form>
         </div>
     </div>
+    <script src="../bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
