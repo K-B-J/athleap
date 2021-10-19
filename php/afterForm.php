@@ -11,8 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <link href="../bootstrap-5.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="../css/afterForm.css" rel="stylesheet">
-    <link href="../css/common.css" rel="stylesheet">
+    <link href="../assets/css/afterForm.css" rel="stylesheet">
 </head>
 
 <body>
