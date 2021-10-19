@@ -26,6 +26,10 @@ body {
     color: #FA9B70;
 }
 
+.nav-link:focus {
+    color: #FA9B70;
+}
+
 .active-link {
     color: #FA9B70;
 }

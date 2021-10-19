@@ -12,6 +12,14 @@
     <link href="../bootstrap-5.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="../assets/css/yogaStyle.css" rel="stylesheet">
+    <link rel="preload" as="image" href="../assets/icons/Home.svg">
+    <link rel="preload" as="image" href="../assets/icons/Home selected.svg">
+    <link rel="preload" as="image" href="../assets/icons/Yoga.svg">
+    <link rel="preload" as="image" href="../assets/icons/Yoga selected.svg">
+    <link rel="preload" as="image" href="../assets/icons/Running.svg">
+    <link rel="preload" as="image" href="../assets/icons/Running selected.svg">
+    <link rel="preload" as="image" href="../assets/icons/Workout.svg">
+    <link rel="preload" as="image" href="../assets/icons/Workout selected.svg">
 </head>
 
 <body>
