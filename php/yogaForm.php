@@ -89,7 +89,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#" onmouseover="workout_hover();" onmouseout="workout_unhover();">
                                 <div style="height: 40px;">
-                                    <img id="workoutIcon" src="../assets/icons/Workout selected.svg" alt="Home icon" style="line-height: 40px;">
+                                    <img id="workoutIcon" src="../assets/icons/Workout.svg" alt="Home icon" style="line-height: 40px;">
                                     <span class="sidebar-text" style="vertical-align: middle;">Workout</span>
                                 </div>
                             </a>
