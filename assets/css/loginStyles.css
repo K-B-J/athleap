@@ -48,11 +48,6 @@ body {
     color: white;
 }
 
-label {
-    /* font-size: 20px; */
-    font-weight: bold;
-}
-
 .form-container {
     padding: 24px;
     margin-left: auto;
