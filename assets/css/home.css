@@ -61,6 +61,11 @@ body {
     .form-container {
         width: 94%;
     }
+
+    #nav-contents{
+        display: grid;
+        justify-content: center;
+    }
 }
 
 .invalid-input {
@@ -96,24 +101,80 @@ body {
     border: solid #ff7b3e;
 }
 
-#content {
-    display: grid;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.round{
-    background-color: gold;
-    border-radius: 50%;
-    height: 400px;
-    width: 400px;
+.card {
+    position: relative;
+    max-width: 300px;
+    height: 215px;
+    background: #cbe7fac2;
+    margin: 40px 20px -20px;
+    padding: 20px 15px;
     display: flex;
     flex-direction: column;
-    align-content: center;
-    justify-content: center;
+    box-shadow: 0 0 10px rgb(240, 236, 236);
+    transition: 0.5s ease-in-out;
 }
 
-#content p{
-    font-size: 24px;
+.card:hover {
+    height: 480px;
+}
+
+.imgBx {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    z-index: 1;
+}
+
+.imgBx img {
+    max-width: 260px;
+    border-radius: 4px;
+    height: 220px;
+    box-shadow: 0 5px 20px rgba(252, 249, 249, 0.541);
+}
+
+.card .content {
+    position: relative;
+    margin-top: -110px;
+    padding: 10px 15px;
+    text-align: center;
+    color: #111;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.card:hover .content {
+    visibility: visible;
+    opacity: 1;
+    margin-top: -0px;
+    transition-delay: 0.3s;
+}
+
+.card:hover .imgBx {
+    height: 220px;
+}
+
+#card1 {
+    background: #f8b195;
+}
+
+#card2 {
+    background: #f67280;
+}
+
+#card3 {
+    background: #ffdc7c;
+}
+
+#card4 {
+    background: #6ba292;
+}
+
+.redir-anchor {
+    color: black;
+    text-decoration: none;
+}
+
+.redir-anchor:hover {
+    color: rgb(70, 66, 66);
 }

@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <nav class="navbar my-navbar">
+    <nav class="navbar my-navbar" id="navbar">
         <div class="container-fluid" style="justify-content: unset;">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <i class="hamburger fas fa-bars fa-lg"></i>
@@ -75,14 +75,17 @@
         </div>
     </nav>
 
-    <canvas id="my-canvas">
-    
-    hello
-
-    </canvas>
+    <canvas id="my-canvas" style="position: absolute;"></canvas>
 
 
-
+    <div id="content">
+        <div class="round">
+            <h2>Congratulations!</h2>
+            <p>You burned</p>
+            <h1>100 Calories</h1>
+            <h2>50 FP Added to your Account!</h2>
+        </div>
+    </div>
 
 
     <script src="../assets/js/confetti-js-master/dist/index.min.js">
@@ -90,6 +93,9 @@
 
     <script>
         var confettiElement = document.getElementById('my-canvas');
+
+        var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var navHeight = document.getElementById('navbar').offsetHeight;
 
         var confettiSettings = {
             "target": confettiElement,
@@ -106,14 +112,22 @@
             "clock": "25",
             "rotate": true,
             // "width": "1536",
-            // "height": "792",
+            "height": height - navHeight,
             "start_from_edge": true,
             "respawn": true
         }
 
         var confetti = new ConfettiGenerator(confettiSettings);
         confetti.render();
+
+        let contentElement = document.getElementById("content")
+        let newHeight = height - navHeight
+        contentElement.style.height = `${newHeight}px`
     </script>
+
+    <script src="../assets/js/sidebarHover.js"></script>
+    <script src="../bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 
