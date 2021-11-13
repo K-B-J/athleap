@@ -48,6 +48,18 @@ body {
     color: white;
 }
 
+.my-dropdown {
+    color: white;
+}
+
+.my-dropdown:hover {
+    color: white;
+}
+
+.my-dropdown:focus {
+    box-shadow: none;
+}
+
 label {
     /* font-size: 20px; */
     font-weight: bold;
@@ -63,6 +75,9 @@ label {
 }
 
 @media only screen and (max-width: 600px) {
+    .my-brand {
+        display: none;
+    }
     .form-container {
         width: 94%;
     }

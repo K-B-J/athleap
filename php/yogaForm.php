@@ -24,6 +24,10 @@
 
 <body>
     <?php
+    session_start();
+    if (!isset($_SESSION["email"])) {
+        header("Location: index.php");
+    }
     $durationErr = "";
     $yogaErr = "";
     $duration = "";
@@ -98,6 +102,17 @@
                 </div>
             </div>
             <a class="my-brand navbar-brand" href="">Today's Workout</a>
+            <div style="flex:1;"></div>
+            <div class="mr-3">
+                <div class="dropdown">
+                    <button style="padding-right: 36px !important;" class="my-dropdown btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo $_SESSION["name"]; ?>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="logout.php">Logout</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
 

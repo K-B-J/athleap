@@ -25,6 +25,10 @@
 <body>
 
     <?php
+    session_start();
+    if (!isset($_SESSION["email"])) {
+        header("Location: index.php");
+    }
     $shopItems = [
         [
             "image" => "http://pngimg.com/uploads/running_shoes/running_shoes_PNG5816.png",
@@ -106,7 +110,18 @@
                     </ul>
                 </div>
             </div>
-            <a class="my-brand navbar-brand" href="">Home</a>
+            <a class="my-brand navbar-brand" href="">Shop</a>
+            <div style="flex:1;"></div>
+            <div class="mr-3">
+                <div class="dropdown">
+                    <button style="padding-right: 36px !important;" class="my-dropdown btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo $_SESSION["name"]; ?>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="logout.php">Logout</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -125,21 +140,21 @@
                                 <div class="content">
                                     <div class="card">
                                         <div class="imgBx">
-                                            <img src="'.$item["image"].'" alt="">
+                                            <img src="' . $item["image"] . '" alt="">
                                         </div>
                                         <div class="contentBx">
-                                            <h2>'.$item["title"].'</h2>
+                                            <h2>' . $item["title"] . '</h2>
                                             <div class="size">
                                                 <h3>Size :</h3>
                                                 ';
-                                                foreach($item['sizes'] as $i){
-                                                    echo "<span>". $i ."</span>";
-                                                };
-                                                
-                                            echo '</div>
+                        foreach ($item['sizes'] as $i) {
+                            echo "<span>" . $i . "</span>";
+                        };
+
+                        echo '</div>
                                             <div class="price">
                                                 <h3>Price :</h3>
-                                                <span>'.$item['price'].'</span>
+                                                <span>' . $item['price'] . '</span>
                                             </div>
                                             <a href="#"> + Buy now</a>
                                         </div>

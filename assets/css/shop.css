@@ -49,6 +49,18 @@ body {
     color: white;
 }
 
+.my-dropdown {
+    color: white;
+}
+
+.my-dropdown:hover {
+    color: white;
+}
+
+.my-dropdown:focus {
+    box-shadow: none;
+}
+
 .form-container {
     padding: 24px;
     margin-left: auto;
@@ -246,11 +258,13 @@ h4 {
 }
 
 @media only screen and (max-width: 600px) {
+    .my-brand {
+        display: none;
+    }
     .products {
         display: grid;
         justify-content: center;
     }
-
     .shop-item {
         margin-left: 2%;
     }

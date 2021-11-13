@@ -23,6 +23,12 @@
 </head>
 
 <body>
+    <?php
+    session_start();
+    if (!isset($_SESSION["email"])) {
+        header("Location: index.php");
+    }
+    ?>
     <nav class="navbar my-navbar" id="navbar">
         <div class="container-fluid" style="justify-content: unset;">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -72,6 +78,17 @@
                 </div>
             </div>
             <a class="my-brand navbar-brand" href="">Result</a>
+            <div style="flex:1;"></div>
+            <div class="mr-3">
+                <div class="dropdown">
+                    <button style="padding-right: 36px !important;" class="my-dropdown btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo $_SESSION["name"]; ?>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="logout.php">Logout</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
 
