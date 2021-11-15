@@ -43,7 +43,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onmouseover="home_hover();" onmouseout="home_unhover();">
+                            <a class="nav-link" href="home.php" onmouseover="home_hover();" onmouseout="home_unhover();">
                                 <div style="height: 40px;">
                                     <img id="homeIcon" src="../assets/icons/Home.svg" alt="Home icon" style="line-height: 40px;">
                                     <span class="sidebar-text" style="vertical-align: middle;">Home</span>
@@ -51,7 +51,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onmouseover="yoga_hover();" onmouseout="yoga_unhover();">
+                            <a class="nav-link" href="yoga.php" onmouseover="yoga_hover();" onmouseout="yoga_unhover();">
                                 <div style="height: 40px;">
                                     <img id="yogaIcon" src="../assets/icons/Yoga.svg" alt="Yoga icon" style="line-height: 40px;">
                                     <span class="sidebar-text" style="vertical-align: middle;">Yoga</span>
@@ -59,17 +59,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onmouseover="running_hover();" onmouseout="running_unhover();">
+                            <a class="nav-link" href="running.php" onmouseover="running_hover();" onmouseout="running_unhover();">
                                 <div style="height: 40px;">
-                                    <img id="runningIcon" src="../assets/icons/Running.svg" alt="Home icon" style="line-height: 40px;">
+                                    <img id="runningIcon" src="../assets/icons/Running.svg" alt="Running icon" style="line-height: 40px;">
                                     <span class="sidebar-text" style="vertical-align: middle;">Running</span>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active-link" href="#">
+                            <a class="nav-link" href="workout.php" onmouseover="workout_hover();" onmouseout="workout_unhover();">
                                 <div style="height: 40px;">
-                                    <img id="workoutIcon" src="../assets/icons/Workout selected.svg" alt="Home icon" style="line-height: 40px;">
+                                    <img id="workoutIcon" src="../assets/icons/Workout.svg" alt="Workout icon" style="line-height: 40px;">
                                     <span class="sidebar-text" style="vertical-align: middle;">Workout</span>
                                 </div>
                             </a>
