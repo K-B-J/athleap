@@ -1,6 +1,5 @@
 {
     "require": {
-        "php": "^7.4.0",
         "ext-mongodb": "^1.10.0",
         "mongodb/mongodb": "^1.9.0"
     }
