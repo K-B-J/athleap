@@ -30,3 +30,11 @@ function gym_unhover() {
     element = document.getElementById('gymIcon')
     element.setAttribute('src', '../assets/icons/Gym.svg')
 }
+function shop_hover() {
+    element = document.getElementById('shopIcon')
+    element.style.color = "#fab798"
+}
+function shop_unhover() {
+    element = document.getElementById('shopIcon')
+    element.style.color = "#b8b8b8"
+}

@@ -110,6 +110,14 @@
                                 </div>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.php" onmouseover="shop_hover();" onmouseout="shop_unhover();">
+                                <div style="height: 40px;">
+                                    <i id="shopIcon" class="shop-icon fas fa-lg fa-shopping-cart"></i>
+                                    <span class="sidebar-text" style="vertical-align: middle;">Shop</span>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
