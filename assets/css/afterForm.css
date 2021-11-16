@@ -60,58 +60,30 @@ body {
     box-shadow: none;
 }
 
-label {
-    /* font-size: 20px; */
-    font-weight: bold;
-}
-
-.form-container {
-    padding: 24px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 580px;
-    border-radius: 30px;
-    box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.2);
-}
-
 @media only screen and (max-width: 600px) {
     .my-brand {
         display: none;
     }
-    .form-container {
-        width: 94%;
-    }
 }
 
-.invalid-input {
-    color: red;
-}
-
-.range-input {
-    display: flex;
-    flex-direction: row;
-}
-
-.range-bar {
-    padding: 0 12px;
-    flex: 1;
-}
-
-.submission {
+#content {
+    display: grid;
+    align-content: center;
+    justify-content: center;
     text-align: center;
-    padding: 12px 12px 0 12px;
 }
 
-.submit {
-    padding: 4px 80px;
-    background-color: #FA9B70;
-    border: solid #FA9B70;
-    border-radius: 50px;
-    color: white;
-    font-size: larger;
+.round {
+    background-color: gold;
+    border-radius: 50%;
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
 }
 
-.submit:hover {
-    background-color: #ff7b3e;
-    border: solid #ff7b3e;
+#content p {
+    font-size: 24px;
 }

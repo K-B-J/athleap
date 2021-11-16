@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <link href="../bootstrap-5.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="../assets/css/gymStyles.css" rel="stylesheet">
+    <link href="../assets/css/registerForm.css" rel="stylesheet">
     <link rel="preload" as="image" href="../assets/icons/Home.svg">
     <link rel="preload" as="image" href="../assets/icons/Home selected.svg">
     <link rel="preload" as="image" href="../assets/icons/Yoga.svg">
@@ -199,7 +199,6 @@
     </div>
 
     <script src="../bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarHover.js"></script>
 </body>
 
 </html>

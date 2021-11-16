@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <link href="../bootstrap-5.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="../assets/css/afterFormStyles.css" rel="stylesheet">
+    <link href="../assets/css/afterForm.css" rel="stylesheet">
     <link rel="preload" as="image" href="../assets/icons/Home.svg">
     <link rel="preload" as="image" href="../assets/icons/Home selected.svg">
     <link rel="preload" as="image" href="../assets/icons/Yoga.svg">
@@ -36,7 +36,7 @@
             </button>
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: #707070;">Today's Workout</h5>
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: #707070;">Result</h5>
                     <button type="button" class="btn-close text-reset shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <hr class="sidebar-divider" style="color:#707070; margin: 6px 12px;">
@@ -67,10 +67,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="workout.php" onmouseover="workout_hover();" onmouseout="workout_unhover();">
+                            <a class="nav-link" href="gym.php" onmouseover="gym_hover();" onmouseout="gym_unhover();">
                                 <div style="height: 40px;">
-                                    <img id="workoutIcon" src="../assets/icons/Workout.svg" alt="Workout icon" style="line-height: 40px;">
-                                    <span class="sidebar-text" style="vertical-align: middle;">Workout</span>
+                                    <img id="gymIcon" src="../assets/icons/Gym.svg" alt="Gym icon" style="line-height: 40px;">
+                                    <span class="sidebar-text" style="vertical-align: middle;">Gym</span>
                                 </div>
                             </a>
                         </li>

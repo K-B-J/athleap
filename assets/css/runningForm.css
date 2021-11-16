@@ -110,25 +110,3 @@ body {
     background-color: #ff7b3e;
     border: solid #ff7b3e;
 }
-
-#content {
-    display: grid;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.round {
-    background-color: gold;
-    border-radius: 50%;
-    height: 400px;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-}
-
-#content p {
-    font-size: 24px;
-}

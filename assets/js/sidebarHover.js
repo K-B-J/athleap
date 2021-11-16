@@ -22,11 +22,11 @@ function running_unhover() {
     element = document.getElementById('runningIcon')
     element.setAttribute('src', '../assets/icons/Running.svg')
 }
-function workout_hover() {
-    element = document.getElementById('workoutIcon')
-    element.setAttribute('src', '../assets/icons/Workout selected.svg')
+function gym_hover() {
+    element = document.getElementById('gymIcon')
+    element.setAttribute('src', '../assets/icons/Gym selected.svg')
 }
-function workout_unhover() {
-    element = document.getElementById('workoutIcon')
-    element.setAttribute('src', '../assets/icons/Workout.svg')
+function gym_unhover() {
+    element = document.getElementById('gymIcon')
+    element.setAttribute('src', '../assets/icons/Gym.svg')
 }

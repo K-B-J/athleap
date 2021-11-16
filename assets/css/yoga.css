@@ -1,0 +1,67 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.my-navbar {
+    background-color: #FA9B70;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.hamburger {
+    color: white;
+}
+
+.hamburger:hover {
+    text-shadow: 0 0 24px #707070;
+}
+
+.nav-link {
+    color: #707070;
+}
+
+.nav-link:hover {
+    color: #FA9B70;
+}
+
+.nav-link:focus {
+    color: #FA9B70;
+}
+
+.active-link {
+    color: #FA9B70;
+}
+
+.sidebar-text {
+    padding-left: 12px;
+}
+
+.my-brand {
+    color: white;
+    padding-left: 12px;
+    font-size: 26px;
+}
+
+.my-brand:hover {
+    color: white;
+}
+
+.my-dropdown {
+    color: white;
+}
+
+.my-dropdown:hover {
+    color: white;
+}
+
+.my-dropdown:focus {
+    box-shadow: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .my-brand {
+        display: none;
+    }
+}

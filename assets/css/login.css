@@ -6,38 +6,6 @@ body {
     background-color: #FA9B70;
 }
 
-.navbar-toggler:focus {
-    box-shadow: none;
-}
-
-.hamburger {
-    color: white;
-}
-
-.hamburger:hover {
-    text-shadow: 0 0 24px #707070;
-}
-
-.nav-link {
-    color: #707070;
-}
-
-.nav-link:hover {
-    color: #FA9B70;
-}
-
-.nav-link:focus {
-    color: #FA9B70;
-}
-
-.active-link {
-    color: #FA9B70;
-}
-
-.sidebar-text {
-    padding-left: 12px;
-}
-
 .my-brand {
     color: white;
     padding-left: 12px;
@@ -65,16 +33,6 @@ body {
 
 .invalid-input {
     color: red;
-}
-
-.range-input {
-    display: flex;
-    flex-direction: row;
-}
-
-.range-bar {
-    padding: 0 12px;
-    flex: 1;
 }
 
 .submission {

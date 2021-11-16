@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <link href="../bootstrap-5.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="../assets/css/gymStyles.css" rel="stylesheet">
+    <link href="../assets/css/gymForm.css" rel="stylesheet">
     <link rel="preload" as="image" href="../assets/icons/Home.svg">
     <link rel="preload" as="image" href="../assets/icons/Home selected.svg">
     <link rel="preload" as="image" href="../assets/icons/Yoga.svg">
@@ -103,10 +103,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="workout.php" onmouseover="workout_hover();" onmouseout="workout_unhover();">
+                            <a class="nav-link" href="gym.php" onmouseover="gym_hover();" onmouseout="gym_unhover();">
                                 <div style="height: 40px;">
-                                    <img id="workoutIcon" src="../assets/icons/Workout.svg" alt="Workout icon" style="line-height: 40px;">
-                                    <span class="sidebar-text" style="vertical-align: middle;">Workout</span>
+                                    <img id="gymIcon" src="../assets/icons/Gym.svg" alt="Gym icon" style="line-height: 40px;">
+                                    <span class="sidebar-text" style="vertical-align: middle;">Gym</span>
                                 </div>
                             </a>
                         </li>
