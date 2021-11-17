@@ -111,7 +111,7 @@
                     <th scope="col">Sets</th>
                     <th scope="col">Reps</th>
                     <th scope="col">Heaviness of the Dumbbell</th>
-                    <th scope="col">Time Spent</th>
+                    <th scope="col">Time Spent (minutes)</th>
                     <th scope="col">Energy Level</th>
                 </tr>
             </thead>

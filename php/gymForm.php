@@ -128,7 +128,7 @@
             $fcoins = fcoins_calculator($age, $calories, $result[sizeof($result) - 1]["fcoins"]);
             $collection = $db->Users;
             $new_fcoins = $old_fcoins + $fcoins;
-            $result = $collection->updateOne(["email" => $email], ['$set' => ["fcoins" => $new_fcoins]]);
+            $collection->updateOne(["email" => $email], ['$set' => ["fcoins" => $new_fcoins]]);
             $_SESSION["calories"] = $calories;
             $_SESSION["fcoins"] = $fcoins;
             $collection = $db->Gym;

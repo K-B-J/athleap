@@ -28,6 +28,98 @@
     if (!isset($_SESSION["email"])) {
         header("Location: index.php");
     }
+    $error_distance = "";
+    $error_elevation = "";
+    $error_time = "";
+    $error_energy = "";
+    if (isset($_POST["save"])) {
+        $distance = $_POST["distance"];
+        $elevation = $_POST["elevation"];
+        $time = $_POST["time"];
+        $energy = $_POST["energy"];
+        $error = false;
+        if (($distance == "") || (is_float($distance)) || ((float)$distance <= 0)) {
+            $error_distance = "Invalid input!";
+            $error = true;
+        }
+        if (($elevation == "") || (is_int($elevation)) || ((int)$elevation <= 0)) {
+            $error_elevation = "Invalid input!";
+            $error = true;
+        }
+        if (($time == "") || (is_int($time)) || ((int)$time <= 0)) {
+            $error_time = "Invalid input!";
+            $error = true;
+        }
+        if (($energy == "") || (is_int($energy))) {
+            $error_energy = "Invalid input!";
+            $error = true;
+        }
+        if (!$error) {
+            function age_calculator($dob)
+            {
+                date_default_timezone_set("Indian/Mahe");
+                $today = date("d/m/Y");
+                $today_day = (int)substr($today, 0, 2);
+                $today_month = (int)substr($today, 3, 2);
+                $today_year = (int)substr($today, 6, 4);
+                $year = (int)substr($dob, 6, 4);
+                $month = (int)substr($dob, 3, 2);
+                $day = (int)substr($dob, 0, 2);
+                if (($today_month > $month) || (($today_month == $month) && ($today_day >= $day))) {
+                    $age = $today_year - $year;
+                } else {
+                    $age = $today_year - $year - 1;
+                }
+                return $age;
+            }
+            function calorie_calculator($age, $bmi, $distance, $elevation, $time, $energy)
+            {
+                if ($energy == 0) {
+                    $energy += 1;
+                }
+                $calories = ($distance * $bmi * $elevation * 2.2) / (($age / 10) * ($time / 10) * ($energy / 10));
+                return (int)floor($calories);
+            }
+            function fcoins_calculator($age, $calories, $previous_fcoins)
+            {
+                $fcoins = (int)floor($calories / $age / 4);
+                if ($fcoins > $previous_fcoins) {
+                    $fcoins += 1;
+                }
+                return $fcoins;
+            }
+            $distance = (float)$_POST["distance"];
+            $elevation = (int)$_POST["elevation"];
+            $time = (int)$_POST["time"];
+            $energy = (int)$_POST["energy"];
+            date_default_timezone_set("Indian/Mahe");
+            $date = date("d/m/Y");
+            $email = $_SESSION["email"];
+            require '../vendor/autoload.php';
+            $ATLAS_CREDENTIALS = getenv("ATLAS_CREDENTIALS");
+            $connection = new MongoDB\Client($ATLAS_CREDENTIALS);
+            $db = $connection->Athleap;
+            $collection = $db->Users;
+            $result = $collection->find(["email" => $email])->toArray();
+            $old_fcoins = $result[0]["fcoins"];
+            $age = age_calculator($result[0]["dob"]);
+            $height = $result[0]["height"];
+            $weight = $result[0]["weight"];
+            $bmi = $weight / (($height / 100) ** 2);
+            $calories = calorie_calculator($age, $bmi, $distance, $elevation, $time, $energy);
+            $collection = $db->Running;
+            $result = $collection->find(["email" => $email])->toArray();
+            $fcoins = fcoins_calculator($age, $calories, $result[sizeof($result) - 1]["fcoins"]);
+            $collection = $db->Users;
+            $new_fcoins = $old_fcoins + $fcoins;
+            $collection->updateOne(["email" => $email], ['$set' => ["fcoins" => $new_fcoins]]);
+            $_SESSION["calories"] = $calories;
+            $_SESSION["fcoins"] = $fcoins;
+            $collection = $db->Running;
+            $collection->insertOne(["email" => $email, "date" => $date, "calories" => $calories, "fcoins" => $fcoins, "distance" => $distance, "elevation" => $elevation, "time" => $time, "energy" => $energy]);
+            header("Location: afterForm.php");
+        }
+    }
     ?>
     <nav class="navbar my-navbar" id="navbar">
         <div class="container-fluid" style="justify-content: unset;">
@@ -99,6 +191,65 @@
             </div>
         </div>
     </nav>
+
+    <div class="form-container my-5">
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
+            <div class="mb-3">
+                <label for="distance" class="form-label">Total distance of the run:</label>
+                <div class="input-group">
+                    <input type="number" name="distance" id="distance" class="form-control" step="0.01" value="<?php echo (isset($_POST['distance'])) ? $_POST['distance'] : ""; ?>" required>
+                    <span class="input-group-text" id="basic-addon2">kilometers</span>
+                </div>
+            </div>
+            <?php
+            if ($error_distance != "") {
+                echo "<p class='small invalid-input'>" . $error_distance . "</p>";
+            }
+            ?>
+            <div class="mb-3">
+                <label for="elevation" class="form-label">Total elevation of the run:</label>
+                <div class="input-group">
+                    <input type="number" name="elevation" id="elevation" class="form-control" value="<?php echo (isset($_POST['elevation'])) ? $_POST['elevation'] : ""; ?>" required>
+                    <span class="input-group-text" id="basic-addon2">meters</span>
+                </div>
+            </div>
+            <?php
+            if ($error_elevation != "") {
+                echo "<p class='small invalid-input'>" . $error_elevation . "</p>";
+            }
+            ?>
+            <div class="mb-3">
+                <label for="time" class="form-label">Total time of the run:</label>
+                <div class="input-group">
+                    <input type="number" name="time" id="time" class="form-control" value="<?php echo (isset($_POST['time'])) ? $_POST['time'] : ""; ?>" required>
+                    <span class="input-group-text" id="basic-addon2">minutes</span>
+                </div>
+            </div>
+            <?php
+            if ($error_time != "") {
+                echo "<p class='small invalid-input'>" . $error_time . "</p>";
+            }
+            ?>
+            <div class="mb-3">
+                <label for="energy" class="form-label">How Energetic do you feel?</label>
+                <div class="range-input">
+                    <div>0</div>
+                    <div class="range-bar">
+                        <input name="energy" type="range" class="form-range" id="energy" min="0" max="100" value="<?php echo (isset($_POST['energy'])) ? $_POST['energy'] : ""; ?>" required>
+                    </div>
+                    <div>100</div>
+                </div>
+            </div>
+            <?php
+            if ($error_energy != "") {
+                echo "<p class='small invalid-input'>" . $error_energy . "</p>";
+            }
+            ?>
+            <div class="submission">
+                <button type="submit" class="submit" name="save">Save</button>
+            </div>
+        </form>
+    </div>
 
     <script src="../bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarHover.js"></script>
