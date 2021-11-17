@@ -84,15 +84,15 @@
                 }
                 return $age;
             }
-            function calorie_calculator($age, $bmi, $sets, $reps, $dumbell_weight, $time, $energy)
+            function calorie_calculator($age, $bmi, $sets, $reps, $dumbbell_weight, $time, $energy)
             {
                 if ($energy == 0) {
                     $energy += 1;
                 }
-                if ($dumbell_weight == 0) {
-                    $dumbell_weight += 1;
+                if ($dumbbell_weight == 0) {
+                    $dumbbell_weight += 1;
                 }
-                $calories = ($sets * $reps * ($bmi / 1.4) * ($dumbell_weight / 28)) / (($age / 10) * ($time / 10) * ($energy / 10));
+                $calories = ($sets * $reps * ($bmi / 1.4) * ($dumbbell_weight / 28)) / (($age / 10) * ($time / 10) * ($energy / 10));
                 return (int)floor($calories);
             }
             function fcoins_calculator($age, $calories, $previous_fcoin)
