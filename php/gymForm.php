@@ -33,26 +33,28 @@
     $error_reps = "";
     $error_time = "";
     $error_energy = "";
+    $error_dumbbell_weight = "";
     if (isset($_POST["save"])) {
         $workout = $_POST["workout"];
         $sets = $_POST["sets"];
         $reps = $_POST["reps"];
         $time = $_POST["time"];
         $energy = $_POST["energy"];
+        $dumbbell_weight = $_POST["dumbbell_weight"];
         $error = false;
         if ($workout == "") {
             $error_workout = "Select an input!";
             $error = true;
         }
-        if (($sets == "") || (is_int($sets))) {
+        if (($sets == "") || (is_int($sets)) || ((int)$sets <= 0)) {
             $error_sets = "Invalid input!";
             $error = true;
         }
-        if (($reps == "") || (is_int($reps))) {
+        if (($reps == "") || (is_int($reps)) || ((int)$reps <= 0)) {
             $error_reps = "Invalid input!";
             $error = true;
         }
-        if (($time == "") || (is_int($time))) {
+        if (($time == "") || (is_int($time)) || ((int)$time <= 0)) {
             $error_time = "Invalid input!";
             $error = true;
         }
@@ -60,8 +62,78 @@
             $error_energy = "Invalid input!";
             $error = true;
         }
+        if (($dumbbell_weight == "") || (is_int($dumbbell_weight))) {
+            $error_dumbbell_weight = "Invalid input!";
+            $error = true;
+        }
         if (!$error) {
-            // Logic
+            function age_calculator($dob)
+            {
+                date_default_timezone_set("Indian/Mahe");
+                $today = date("d/m/Y");
+                $today_day = (int)substr($today, 0, 2);
+                $today_month = (int)substr($today, 3, 2);
+                $today_year = (int)substr($today, 6, 4);
+                $year = (int)substr($dob, 6, 4);
+                $month = (int)substr($dob, 3, 2);
+                $day = (int)substr($dob, 0, 2);
+                if (($today_month > $month) || (($today_month == $month) && ($today_day >= $day))) {
+                    $age = $today_year - $year;
+                } else {
+                    $age = $today_year - $year - 1;
+                }
+                return $age;
+            }
+            function calorie_calculator($age, $bmi, $sets, $reps, $dumbell_weight, $time, $energy)
+            {
+                if ($energy == 0) {
+                    $energy += 1;
+                }
+                if ($dumbell_weight == 0) {
+                    $dumbell_weight += 1;
+                }
+                $calories = ($sets * $reps * ($bmi / 1.4) * ($dumbell_weight / 28)) / (($age / 10) * ($time / 10) * ($energy / 10));
+                return (int)floor($calories);
+            }
+            function fcoins_calculator($age, $calories, $previous_fcoin)
+            {
+                $fcoins = (int)floor($calories / $age / 4);
+                if ($fcoins > $previous_fcoin) {
+                    $fcoins += 1;
+                }
+                return $fcoins;
+            }
+            $sets = (int)$_POST["sets"];
+            $reps = (int)$_POST["reps"];
+            $time = (int)$_POST["time"];
+            $energy = (int)$_POST["energy"];
+            $dumbbell_weight = (int)$_POST["dumbbell_weight"];
+            date_default_timezone_set("Indian/Mahe");
+            $date = date("d/m/Y");
+            $email = $_SESSION["email"];
+            require '../vendor/autoload.php';
+            $ATLAS_CREDENTIALS = getenv("ATLAS_CREDENTIALS");
+            $connection = new MongoDB\Client($ATLAS_CREDENTIALS);
+            $db = $connection->Athleap;
+            $collection = $db->Users;
+            $result = $collection->find(["email" => $email])->toArray();
+            $old_fcoins = $result[0]["fcoins"];
+            $age = age_calculator($result[0]["dob"]);
+            $height = $result[0]["height"];
+            $weight = $result[0]["weight"];
+            $bmi = $weight / (($height / 100) ** 2);
+            $calories = calorie_calculator($age, $bmi, $sets, $reps, $dumbbell_weight, $time, $energy);
+            $collection = $db->Gym;
+            $result = $collection->find(["email" => $email])->toArray();
+            $fcoins = fcoins_calculator($age, $calories, $result[sizeof($result) - 1]["fcoins"]);
+            $collection = $db->Users;
+            $new_fcoins = $old_fcoins + $fcoins;
+            $result = $collection->updateOne(["email" => $email], ['$set' => ["fcoins" => $new_fcoins]]);
+            $_SESSION["calories"] = $calories;
+            $_SESSION["fcoins"] = $fcoins;
+            $collection = $db->Gym;
+            $collection->insertOne(["email" => $email, "date" => $date, "calories" => $calories, "fcoins" => $fcoins, "workout" => $workout, "sets" => $sets, "reps" => $reps, "dumbbell_weight" => $dumbbell_weight, "time" => $time, "energy" => $energy]);
+            header("Location: afterForm.php");
         }
     }
     ?>
@@ -183,8 +255,26 @@
             }
             ?>
             <div class="mb-3">
-                <label for="time" class="form-label">Total time taken to complete all sets: (in minutes)</label>
-                <input type="number" name="time" id="time" class="form-control" value="<?php echo (isset($_POST['time'])) ? $_POST['time'] : ""; ?>" required>
+                <label for="dumbbell_weight" class="form-label">Rate the heaviness of the Dumbbell:</label>
+                <div class="range-input">
+                    <div>0</div>
+                    <div class="range-bar">
+                        <input name="dumbbell_weight" type="range" class="form-range" id="dumbbell_weight" min="0" max="100" value="<?php echo (isset($_POST['dumbbell_weight'])) ? $_POST['dumbbell_weight'] : ""; ?>" required>
+                    </div>
+                    <div>100</div>
+                </div>
+            </div>
+            <?php
+            if ($error_dumbbell_weight != "") {
+                echo "<p class='small invalid-input'>" . $error_dumbbell_weight . "</p>";
+            }
+            ?>
+            <div class="mb-3">
+                <label for="time" class="form-label">Total time taken to complete all sets:</label>
+                <div class="input-group">
+                    <input type="number" name="time" id="time" class="form-control" value="<?php echo (isset($_POST['time'])) ? $_POST['time'] : ""; ?>" required>
+                    <span class="input-group-text" id="basic-addon2">minutes</span>
+                </div>
             </div>
             <?php
             if ($error_time != "") {

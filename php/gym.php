@@ -99,6 +99,53 @@
             </div>
         </div>
     </nav>
+    <div class="table-responsive">
+        <table class="my-table table table-hover">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Calories Burnt</th>
+                    <th scope="col">FCoins Rewarded</th>
+                    <th scope="col">Workout</th>
+                    <th scope="col">Sets</th>
+                    <th scope="col">Reps</th>
+                    <th scope="col">Heaviness of the Dumbbell</th>
+                    <th scope="col">Time Spent</th>
+                    <th scope="col">Energy Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                require '../vendor/autoload.php';
+                $ATLAS_CREDENTIALS = getenv("ATLAS_CREDENTIALS");
+                $connection = new MongoDB\Client($ATLAS_CREDENTIALS);
+                $db = $connection->Athleap;
+                $collection = $db->Gym;
+                $email = $_SESSION["email"];
+                $result = $collection->find(["email" => $email])->toArray();
+                if (empty($result)) {
+                    echo "<tr style='text-align:center;'><td colspan='10'>No Data!</td></tr>";
+                } else {
+                    for ($i = sizeof($result); $i > 0; $i--) {
+                        $data = $result[$i - 1];
+                        $date = $data['date'];
+                        $calories = $data['calories'];
+                        $fcoins = $data['fcoins'];
+                        $workout = $data['workout'];
+                        $sets = $data['sets'];
+                        $reps = $data['reps'];
+                        $dumbbell_weight = $data['dumbbell_weight'];
+                        $time = $data['time'];
+                        $energy = $data['energy'];
+                        echo "<tr class='text-center'><th scope='row'>" . strval(sizeof($result) - $i + 1) . "</th><td>$date</td><td>$calories</td><td>$fcoins</td><td>$workout</td><td>$sets</td><td>$reps</td><td>$dumbbell_weight</td><td>$time</td><td>$energy</td></tr>";
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <a href="gymForm.php" class="btn-circle"><i class="fa fa-plus"></i></a>
 
     <script src="../bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarHover.js"></script>

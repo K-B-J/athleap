@@ -64,8 +64,37 @@ body {
     box-shadow: none;
 }
 
+.my-table {
+    margin: 2%;
+    max-width: 96%;
+}
+
+.btn-circle {
+    z-index: 1;
+    position: fixed;
+    bottom: 5.6%;
+    right: 4.6%;
+    background-color: rgba(250, 156, 112, 0.65);
+    color: rgba(255, 255, 255, 0.65);
+    width: 80px;
+    height: 80px;
+    padding: 26px 31px;
+    border-radius: 400px;
+    font-size: 22px;
+    line-height: 1.33;
+}
+
+.btn-circle:hover {
+    background-color: #FA9B70;
+    color: white;
+}
+
 @media only screen and (max-width: 600px) {
     .my-brand {
         display: none;
+    }
+    .my-table {
+        margin: 3%;
+        max-width: 94%;
     }
 }

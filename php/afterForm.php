@@ -28,6 +28,9 @@
     if (!isset($_SESSION["email"])) {
         header("Location: index.php");
     }
+    if (!isset($_SESSION["calories"])){
+        header("Location: home.php");
+    }
     ?>
     <nav class="navbar my-navbar" id="navbar">
         <div class="container-fluid" style="justify-content: unset;">
@@ -107,8 +110,14 @@
         <div class="round">
             <h2>Congratulations!</h2>
             <p>You burned</p>
-            <h1>100 Calories</h1>
-            <h2>50 FP Added to your Account!</h2>
+            <?php
+            $calories = $_SESSION["calories"];
+            $fcoins = $_SESSION["fcoins"];
+            unset($_SESSION["calories"]);
+            unset($_SESSION["fcoins"]);
+            echo "<h1>$calories Calories</h1>";
+            echo "<h2>$fcoins FCoins Added to your Account!</h2>"
+            ?>
         </div>
     </div>
 
