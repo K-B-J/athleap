@@ -95,10 +95,10 @@
                 $calories = ($sets * $reps * ($bmi / 1.4) * ($dumbbell_weight / 28)) / (($age / 10) * ($time / 10) * ($energy / 10));
                 return (int)floor($calories);
             }
-            function fcoins_calculator($age, $calories, $previous_fcoin)
+            function fcoins_calculator($age, $calories, $previous_fcoins)
             {
                 $fcoins = (int)floor($calories / $age / 4);
-                if ($fcoins > $previous_fcoin) {
+                if ($fcoins > $previous_fcoins) {
                     $fcoins += 1;
                 }
                 return $fcoins;
