@@ -33,12 +33,14 @@
     $duration = "";
     $rating = "";
     $yoga = "";
+
     if (isset($_POST["save"])) {
+        $duration = $_POST["duration"];
+        $rating = $_POST["exerciseRate"];
+
         if (empty($_POST["duration"])) {
-            // echo "<span style='color:red;'>Duration cannot be empty</span><br>";
             $durationErr = "Duration cannot be empty";
         } else if (preg_match("/^[a-zA-Z]*$/", $_POST["duration"])) {
-            // echo "<span style='color:red;'>Duration cannot be letter</span><br>";
             $durationErr = "Duration cannot be letter";
         } else if ((int)($_POST["duration"]) <= 0) {
             $durationErr = "Duration should be greater than 0";
@@ -50,7 +52,64 @@
         } else {
             $yoga = $_POST["yogaAsan"];
         }
-        $rating = $_POST["exerciseRate"];
+
+        if ($durationErr == "" && $yogaErr == "") {
+
+            function calorie_calculator($wt, $yoga, $dur)
+            {
+                $met = 0;
+                if ($yoga = "Nadisodhana") {
+                    $met = 2;
+                } else if ($yoga = "Hatha") {
+                    $met = 2.5;
+                } else if ($yoga = "Surya Namaskar") {
+                    $met = 3.3;
+                } else {
+                    $met = 4;
+                }
+                return ($met * $wt * 3.5) / 200;
+            }
+
+            function fcoins_calculator($age, $calories, $previous_fcoins)
+            {
+                $fcoins = ($calories/2) + (int)floor(($age / 10));
+                if ($fcoins > $previous_fcoins) {
+                    $fcoins += 1;
+                }
+                return floor($fcoins);
+            }
+
+            date_default_timezone_set("Indian/Mahe");
+            $email = $_SESSION["email"];
+            $age = $_SESSION["age"];
+            $weight = $_SESSION["weight"];
+            $old_fcoins = $_SESSION["fcoins"];
+            date_default_timezone_set("Indian/Mahe");
+            $date = date("d/m/Y");
+
+            require '../vendor/autoload.php';
+            $ATLAS_CREDENTIALS = getenv("ATLAS_CREDENTIALS");
+            $connection = new MongoDB\Client($ATLAS_CREDENTIALS);
+            $db = $connection->Athleap;
+            $calories = calorie_calculator($weight, $yoga, $duration);
+            $collection = $db->Yoga;
+            $result = $collection->find(["email" => $email])->toArray();
+            if(sizeof($result)>0){
+                $fcoins = fcoins_calculator($age, $calories, $result[sizeof($result) - 1]["fcoins"]);
+            }
+            else{
+                $fcoins = fcoins_calculator($age, $calories, 0);
+            }
+            $collection = $db->Users;
+            $new_fcoins = $old_fcoins + $fcoins;
+            $_SESSION["fcoins"] = $new_fcoins;
+            $collection->updateOne(["email" => $email], ['$set' => ["fcoins" => $new_fcoins]]);
+            $_SESSION["calories"] = $calories;
+            $_SESSION["excercise_fcoins"] = $fcoins;
+            $collection = $db->Yoga;
+            $collection->insertOne(["email" => $email, "date" => $date, "calories" => $calories, "fcoins" => $fcoins, "yoga" => $yoga, "duration" => $duration, "energy" => $rating]);
+            header("Location: afterForm.php");
+        }
     }
     ?>
     <nav class="navbar my-navbar">
@@ -70,7 +129,7 @@
                             <a class="nav-link" href="home.php" onmouseover="home_hover();" onmouseout="home_unhover();">
                                 <div style="height: 40px;">
                                     <img id="homeIcon" src="../assets/icons/Home.svg" alt="Home icon" style="line-height: 40px;">
-                                    <span class="sidebar-text" style="vertical-align: middle;">Today's Workout</span>
+                                    <span class="sidebar-text" style="vertical-align: middle;">Home</span>
                                 </div>
                             </a>
                         </li>
@@ -129,10 +188,11 @@
             <div class="mb-3">
                 <label class="form-label" for="yogaAsan">Select Yoga Asan: </label>
                 <select class="form-select" name="yogaAsan">
-                    <option value="">SELECT</option>
-                    <option value="SIRSASANA">HEADSTAND - SIRSASANA</option>
-                    <option value="HALASANA">PLOUGH - HALASANA</option>
-                    <option value="MATSYASANA">FISH - MATSYASANA</option>
+                    <option value="" <?php echo (isset($_POST['yogaAsan']) && $_POST['yogaAsan']=="") ? "SELECTED" : ""; ?>>SELECT</option>
+                    <option value="Nadisodhana" <?php echo (isset($_POST['yogaAsan']) && $_POST['yogaAsan']=="Nadisodhana") ? "SELECTED" : ""; ?>>Nadisodhana</option>
+                    <option value="Hatha" <?php echo (isset($_POST['yogaAsan']) && $_POST['yogaAsan']=="Hatha") ? "SELECTED" : ""; ?>>Hatha</option>
+                    <option value="Surya Namaskar" <?php echo (isset($_POST['yogaAsan']) && $_POST['yogaAsan']=="Surya Namaskar") ? "SELECTED" : ""; ?>>Surya Namaskar</option>
+                    <option value="Power Yoga" <?php echo (isset($_POST['yogaAsan']) && $_POST['yogaAsan']=="Power Yoga") ? "SELECTED" : ""; ?>>Power Yoga</option>
                 </select>
                 <?php
                 if ($durationErr != "") {
@@ -142,7 +202,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="duration">Duration of exercise: </label>
-                <input type="text" id="duration" name="duration" class="form-control">
+                <input type="text" id="duration" name="duration" class="form-control" value="<?php echo (isset($_POST['duration'])) ? $_POST['duration'] : ""; ?>">
                 <?php
                 if ($durationErr != "") {
                     echo '<small id="durationHelp" class="form-text" style="color: #FF2226">' . $durationErr . '</small>';
@@ -150,9 +210,6 @@
                     echo '<small id="durationHelp" class="form-text text-dark">in minutes</small>';
                 }
                 ?>
-                <!-- <small id="durationHelp" class="form-text text-dark">
-                            in minutes
-                        </small> -->
             </div>
             <div class="mb-3">
                 <label class="form-label" for="exerciseRate">Rate your Exercise: </label>

@@ -36,7 +36,7 @@
             </button>
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: #707070;">Today's Workout</h5>
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: #707070;">Yoga Records</h5>
                     <button type="button" class="btn-close text-reset shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <hr class="sidebar-divider" style="color:#707070; margin: 6px 12px;">
@@ -46,7 +46,7 @@
                             <a class="nav-link" href="home.php" onmouseover="home_hover();" onmouseout="home_unhover();">
                                 <div style="height: 40px;">
                                     <img id="homeIcon" src="../assets/icons/Home.svg" alt="Home icon" style="line-height: 40px;">
-                                    <span class="sidebar-text" style="vertical-align: middle;">Yoga Records</span>
+                                    <span class="sidebar-text" style="vertical-align: middle;">Home</span>
                                 </div>
                             </a>
                         </li>
@@ -99,6 +99,47 @@
             </div>
         </div>
     </nav>
+    <div class="table-responsive">
+        <table class="my-table table table-hover">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Calories Burnt</th>
+                    <th scope="col">FCoins Rewarded</th>
+                    <th scope="col">Yoga</th>
+                    <th scope="col">Time Spent (minutes)</th>
+                    <th scope="col">Energy Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                require '../vendor/autoload.php';
+                $ATLAS_CREDENTIALS = getenv("ATLAS_CREDENTIALS");
+                $connection = new MongoDB\Client($ATLAS_CREDENTIALS);
+                $db = $connection->Athleap;
+                $collection = $db->Yoga;
+                $email = $_SESSION["email"];
+                $result = $collection->find(["email" => $email])->toArray();
+                if (empty($result)) {
+                    echo "<tr style='text-align:center;'><td colspan='10'>No Data!</td></tr>";
+                } else {
+                    for ($i = sizeof($result); $i > 0; $i--) {
+                        $data = $result[$i - 1];
+                        $date = $data['date'];
+                        $calories = $data['calories'];
+                        $fcoins = $data['fcoins'];
+                        $workout = $data['yoga'];
+                        $time = $data['duration'];
+                        $energy = $data['energy'];
+                        echo "<tr class='text-center'><th scope='row'>" . strval(sizeof($result) - $i + 1) . "</th><td>$date</td><td>$calories</td><td>$fcoins</td><td>$workout</td><td>$time</td><td>$energy</td></tr>";
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <a href="yogaForm.php" class="btn-circle"><i class="fa fa-plus"></i></a>
 
     <script src="../bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarHover.js"></script>

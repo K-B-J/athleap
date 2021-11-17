@@ -67,23 +67,23 @@
             $error = true;
         }
         if (!$error) {
-            function age_calculator($dob)
-            {
-                date_default_timezone_set("Indian/Mahe");
-                $today = date("d/m/Y");
-                $today_day = (int)substr($today, 0, 2);
-                $today_month = (int)substr($today, 3, 2);
-                $today_year = (int)substr($today, 6, 4);
-                $year = (int)substr($dob, 6, 4);
-                $month = (int)substr($dob, 3, 2);
-                $day = (int)substr($dob, 0, 2);
-                if (($today_month > $month) || (($today_month == $month) && ($today_day >= $day))) {
-                    $age = $today_year - $year;
-                } else {
-                    $age = $today_year - $year - 1;
-                }
-                return $age;
-            }
+            // function age_calculator($dob)
+            // {
+            //     date_default_timezone_set("Indian/Mahe");
+            //     $today = date("d/m/Y");
+            //     $today_day = (int)substr($today, 0, 2);
+            //     $today_month = (int)substr($today, 3, 2);
+            //     $today_year = (int)substr($today, 6, 4);
+            //     $year = (int)substr($dob, 6, 4);
+            //     $month = (int)substr($dob, 3, 2);
+            //     $day = (int)substr($dob, 0, 2);
+            //     if (($today_month > $month) || (($today_month == $month) && ($today_day >= $day))) {
+            //         $age = $today_year - $year;
+            //     } else {
+            //         $age = $today_year - $year - 1;
+            //     }
+            //     return $age;
+            // }
             function calorie_calculator($age, $bmi, $sets, $reps, $dumbbell_weight, $time, $energy)
             {
                 if ($energy == 0) {
@@ -111,16 +111,16 @@
             date_default_timezone_set("Indian/Mahe");
             $date = date("d/m/Y");
             $email = $_SESSION["email"];
+            $age = $_SESSION["age"];
+            $weight = $_SESSION["weight"];
+            $height = $_SESSION["height"];
+            $old_fcoins = $_SESSION["fcoins"];
             require '../vendor/autoload.php';
             $ATLAS_CREDENTIALS = getenv("ATLAS_CREDENTIALS");
             $connection = new MongoDB\Client($ATLAS_CREDENTIALS);
             $db = $connection->Athleap;
-            $collection = $db->Users;
-            $result = $collection->find(["email" => $email])->toArray();
-            $old_fcoins = $result[0]["fcoins"];
-            $age = age_calculator($result[0]["dob"]);
-            $height = $result[0]["height"];
-            $weight = $result[0]["weight"];
+            // $collection = $db->Users;
+            // $result = $collection->find(["email" => $email])->toArray();
             $bmi = $weight / (($height / 100) ** 2);
             $calories = calorie_calculator($age, $bmi, $sets, $reps, $dumbbell_weight, $time, $energy);
             $collection = $db->Gym;
@@ -128,9 +128,10 @@
             $fcoins = fcoins_calculator($age, $calories, $result[sizeof($result) - 1]["fcoins"]);
             $collection = $db->Users;
             $new_fcoins = $old_fcoins + $fcoins;
+            $_SESSION["fcoins"] = $new_fcoins;
             $collection->updateOne(["email" => $email], ['$set' => ["fcoins" => $new_fcoins]]);
             $_SESSION["calories"] = $calories;
-            $_SESSION["fcoins"] = $fcoins;
+            $_SESSION["excercise_fcoins"] = $fcoins;
             $collection = $db->Gym;
             $collection->insertOne(["email" => $email, "date" => $date, "calories" => $calories, "fcoins" => $fcoins, "workout" => $workout, "sets" => $sets, "reps" => $reps, "dumbbell_weight" => $dumbbell_weight, "time" => $time, "energy" => $energy]);
             header("Location: afterForm.php");

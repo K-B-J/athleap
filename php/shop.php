@@ -29,6 +29,8 @@
     if (!isset($_SESSION["email"])) {
         header("Location: index.php");
     }
+
+    $fc = $_SESSION["fcoins"];
     $shopItems = [
         [
             "image" => "http://pngimg.com/uploads/running_shoes/running_shoes_PNG5816.png",
@@ -79,7 +81,7 @@
                             <a class="nav-link" href="home.php" onmouseover="home_hover();" onmouseout="home_unhover();">
                                 <div style="height: 40px;">
                                     <img id="homeIcon" src="../assets/icons/Home.svg" alt="Home icon" style="line-height: 40px;">
-                                    <span class="sidebar-text" style="vertical-align: middle;">Shop</span>
+                                    <span class="sidebar-text" style="vertical-align: middle;">Home</span>
                                 </div>
                             </a>
                         </li>
@@ -155,6 +157,7 @@
                                             <div class="size">
                                                 <h3>Size :</h3>
                                                 ';
+
                         foreach ($item['sizes'] as $i) {
                             echo "<span>" . $i . "</span>";
                         };
@@ -162,9 +165,14 @@
                         echo '</div>
                                             <div class="price">
                                                 <h3>Price :</h3>
-                                                <span>' . $item['price'] . '</span>
+                                                <span>' . $item['price'] . 'FC</span>
                                             </div>
-                                            <a href="#"> + Buy now</a>
+                                            <button class = "btn buy-btn"';
+                                            echo ($item["price"]>$fc)? "disabled":"";
+                                            echo '>
+                                                ';
+                                                echo ($item["price"]>$fc)? "Insufficient FC":'+ Buy now';
+                                            echo '</button>
                                         </div>
                                     </div>
                                 </div>
@@ -174,27 +182,6 @@
 
 
                     ?>
-                    <!-- <div class="col-3 mx-5 my-3" ng-repeat="item in list">
-                        <div class="content">
-                            <div class="card">
-                                <div class="imgBx">
-                                    <img src="{{ item.image }}" alt="">
-                                </div>
-                                <div class="contentBx">
-                                    <h2>{{ item.title }}</h2>
-                                    <div class="size">
-                                        <h3>Size :</h3>
-                                        <span ng-repeat="i in item.sizes">{{ i }}</span>
-                                    </div>
-                                    <div class="price">
-                                        <h3>Price :</h3>
-                                        <span>$ {{ item.price }} </span>
-                                    </div>
-                                    <a href="#"> + Buy now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
                 <br>
             </div>

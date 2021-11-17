@@ -72,6 +72,9 @@ body {
         display: grid;
         justify-content: center;
     }
+    .new-info{
+        margin-bottom: 20px;
+    }
 }
 
 .card {

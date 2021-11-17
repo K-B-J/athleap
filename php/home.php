@@ -149,56 +149,66 @@
     </div>
 
     <div class="row my-5" id="nav-contents">
-        <div class="col-md-3">
-            <div class="card" id="card1">
-                <div class="imgBx">
-                    <img src="https://www.wpbeginner.com/wp-content/uploads/2018/07/whatisblog.png">
-                </div>
-                <div class="content">
-                    <h2> <a href="blog.html" class="redir-anchor">Blog</a> </h2>
-                    <p>
-                        A space to read the most amazing blogs written by professionals, on topics of your interest. You
-                        can read on topics such as yoga, aerobics, or even your favorite sport!
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
+    <div class="col-md-3 new-info">
             <div class="card" id="card2">
                 <div class="imgBx">
                     <img src="../assets/images/shop.jpg">
                 </div>
                 <div class="content">
-                    <h2><a href="shop.html" class="redir-anchor">Shop</a></h2>
+                    <h2><a href="shop.php" class="redir-anchor">Shop</a></h2>
                     <p>
-                        Struggling to find sports and fitness equipment to Grind? <br> Don't worry. <br> We are <br>
-                        Your One Stop Shop for All Things Sports</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card" id="card3">
-                <div class="imgBx">
-                    <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80">
-                </div>
-                <div class="content">
-                    <h2><a href="profile.html" class="redir-anchor">Profile</a></h2>
-                    <p>
-                        Use this site to its maximum capability by signing in and feeling the <br>
-                        <strong>Magic</strong>
+                        Spend your hard earned Fitness Coins here! <br>
+                        Your sweat is Rewarded by us<br>
+                        because we value your <br>
+                        <strong>Fitness!</strong>
                     </p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card" id="card4">
+        <div class="col-md-3 new-info">
+            <div class="card" id="card1">
                 <div class="imgBx">
-                    <img src="https://d2slcw3kip6qmk.cloudfront.net/marketing/blog/2019Q1/giving-feedback/how-to-give-feedback-header@2x.png">
+                    <img src="https://wallpaperaccess.com/full/1642690.jpg">
                 </div>
                 <div class="content">
-                    <h2><a href="contact.html" class="redir-anchor">Feedback</a></h2>
-                    <p>We really value your feedback. <br>It would be amazing if you could take a small survey form and
-                        tell us how you like the website. Or even what change you would like to see. </p>
+                    <h2> <a href="yoga.php" class="redir-anchor">Yoga</a> </h2>
+                    <p>
+                        Yoga is a Flame <br>
+                        When you light it up <br>
+                        The Glow <br>
+                        Never Fades Away!
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 new-info">
+            <div class="card" id="card3">
+                <div class="imgBx">
+                    <img src="https://images.pexels.com/photos/949131/pexels-photo-949131.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+                </div>
+                <div class="content">
+                    <h2><a href="gym.php" class="redir-anchor">Gym</a></h2>
+                    <p>
+                        Always have a track on your gains!<br>
+                        Leave it to us to help you calculate the best course for your Gains.
+                        <!-- <strong>Magic</strong> -->
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 new-info">
+            <div class="card" id="card4">
+                <div class="imgBx">
+                    <img src="https://images.unsplash.com/photo-1594882645126-14020914d58d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cnVubmluZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80">
+                </div>
+                <div class="content">
+                    <h2><a href="running.php" class="redir-anchor">Running</a></h2>
+                    <p>
+                        Running is one of the best athletic activities! <br>
+                        It supports mental as well as physical health! <br>
+                        Leave it to us to calculate your calorie consumption! <br>
+                    </p>
                 </div>
             </div>
         </div>

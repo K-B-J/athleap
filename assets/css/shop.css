@@ -112,7 +112,7 @@ h4 {
 }
 
 .content .card:after {
-    content: 'FitNice';
+    content: 'Athleap';
     position: absolute;
     top: 30%;
     Left: -20%;
@@ -251,6 +251,37 @@ h4 {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+.buy-btn{
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ffffff;
+    border-radius: 4px;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    color: black;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 0.5s;
+}
+
+.buy-btn:hover {
+    background: #9bdc28;
+    transition-delay: 0s;
+}
+
+.buy-btn:disabled{
+    background-color: gray;
+    color: black;
+}
+
+.card:hover .buy-btn {
+    opacity: 1;
+    transform: translateY(0px);
+    transition-delay: 0.75s;
+}
+
 
 @media only screen and (max-width: 600px) {
     .my-brand {

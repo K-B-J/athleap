@@ -56,8 +56,21 @@
                 $error_email = "No user registered with the following email.";
             } else {
                 if ($result[0]["password"] == $password) {
+                    function age_calculator($dob){
+                        date_default_timezone_set("Indian/Mahe");
+                        $formattedDob = date_create_from_format('d/m/Y',$dob);
+                        $formattedDob = intval($formattedDob->format('U'));
+                        $presentDate =  date_create_from_format('d/m/Y',date('d/m/Y', time()));
+                        $presentDate = intval($presentDate->format('U'));
+                        $finalAge = ($presentDate-$formattedDob)/31556926;
+                        return intval($finalAge);
+                    }
                     $_SESSION["email"] = $email;
                     $_SESSION["name"] = $result[0]["name"];
+                    $_SESSION["weight"] = $result[0]["weight"];
+                    $_SESSION["height"] = $result[0]["height"];
+                    $_SESSION["fcoins"] = $result[0]["fcoins"];
+                    $_SESSION["age"]= age_calculator($result[0]["dob"]);
                     header("Location: home.php");
                 } else {
                     $error_password = "Incorrect password!";

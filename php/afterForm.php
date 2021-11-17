@@ -112,11 +112,11 @@
             <p>You burned</p>
             <?php
             $calories = $_SESSION["calories"];
-            $fcoins = $_SESSION["fcoins"];
+            $fcoins = $_SESSION["excercise_fcoins"];
             unset($_SESSION["calories"]);
-            unset($_SESSION["fcoins"]);
+            unset($_SESSION["excercise_fcoins"]);
             echo "<h1>$calories Calories</h1>";
-            echo "<h2>$fcoins FCoins Added to your Account!</h2>"
+            echo "<h2>$fcoins FCoins Earned!</h2>"
             ?>
         </div>
     </div>
