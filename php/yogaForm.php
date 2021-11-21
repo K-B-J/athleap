@@ -72,7 +72,7 @@
 
             function fcoins_calculator($age, $calories, $previous_fcoins)
             {
-                $fcoins = ($calories/2) + (int)floor(($age / 10));
+                $fcoins = ($calories/4) + (int)floor(($age / 10));
                 if ($fcoins > $previous_fcoins) {
                     $fcoins += 1;
                 }
@@ -104,6 +104,7 @@
             $new_fcoins = $old_fcoins + $fcoins;
             $_SESSION["fcoins"] = $new_fcoins;
             $collection->updateOne(["email" => $email], ['$set' => ["fcoins" => $new_fcoins]]);
+            $calories = $calories*100;
             $_SESSION["calories"] = $calories;
             $_SESSION["excercise_fcoins"] = $fcoins;
             $collection = $db->Yoga;

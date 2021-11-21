@@ -22,7 +22,7 @@
     <link rel="preload" as="image" href="../assets/icons/Workout selected.svg">
 </head>
 
-<body>
+<body class="bg-dark">
 
     <?php
     session_start();
@@ -136,9 +136,7 @@
     </nav>
 
     <div id="content1">
-        <h3>Shop</h3>
-        <h4>.Your Sweat Pays a Lot.</h4>
-        <div class="container text-dark my-4 bg-dark">
+        <div class="container text-dark my-4">
             <div id="catalog my-5">
                 &nbsp;
                 <div class="row text-light products">

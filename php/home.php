@@ -148,72 +148,40 @@
         </div>
     </div>
 
-    <div class="row my-5" id="nav-contents">
-    <div class="col-md-3 new-info">
-            <div class="card" id="card2">
-                <div class="imgBx">
-                    <img src="../assets/images/shop.jpg">
+    <div class="content-row text-center">
+        <div class="content-div">
+            <a class="nav-link" href="yoga.php">
+                <div style="height: 100px;">
+                    <img id="yogaIcon" src="../assets/icons/Yoga.svg" alt="Yoga icon" style="line-height: 40px; height: 100px;"> <br>
+                    <span style="font-size: 24px;">Yoga</span>
                 </div>
-                <div class="content">
-                    <h2><a href="shop.php" class="redir-anchor">Shop</a></h2>
-                    <p>
-                        Spend your hard earned Fitness Coins here! <br>
-                        Your sweat is Rewarded by us<br>
-                        because we value your <br>
-                        <strong>Fitness!</strong>
-                    </p>
-                </div>
-            </div>
+            </a>
         </div>
-        <div class="col-md-3 new-info">
-            <div class="card" id="card1">
-                <div class="imgBx">
-                    <img src="https://wallpaperaccess.com/full/1642690.jpg">
+        <div class="content-div">
+            <a class="nav-link" href="gym.php">
+                <div style="height: 100px;">
+                    <img id="gymIcon" src="../assets/icons/Gym.svg" alt="Gym icon" style="line-height: 40px; height: 100px;"> <br>
+                    <span style="font-size: 24px;">Gym</span>
                 </div>
-                <div class="content">
-                    <h2> <a href="yoga.php" class="redir-anchor">Yoga</a> </h2>
-                    <p>
-                        Yoga is a Flame <br>
-                        When you light it up <br>
-                        The Glow <br>
-                        Never Fades Away!
-                    </p>
-                </div>
-            </div>
+            </a>
         </div>
-        
-        <div class="col-md-3 new-info">
-            <div class="card" id="card3">
-                <div class="imgBx">
-                    <img src="https://images.pexels.com/photos/949131/pexels-photo-949131.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+        <div class="content-div">
+            <a class="nav-link" href="running.php">
+                <div style="height: 100px;">
+                    <img id="runningIcon" src="../assets/icons/Running.svg" alt="Running icon" style="line-height: 40px; height: 100px;"> <br>
+                    <span style="font-size: 24px;">Running</span>
                 </div>
-                <div class="content">
-                    <h2><a href="gym.php" class="redir-anchor">Gym</a></h2>
-                    <p>
-                        Always have a track on your gains!<br>
-                        Leave it to us to help you calculate the best course for your Gains.
-                        <!-- <strong>Magic</strong> -->
-                    </p>
-                </div>
-            </div>
+            </a>
         </div>
-        <div class="col-md-3 new-info">
-            <div class="card" id="card4">
-                <div class="imgBx">
-                    <img src="https://images.unsplash.com/photo-1594882645126-14020914d58d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cnVubmluZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80">
+        <div class="content-div">
+            <a class="nav-link" href="shop.php">
+                <div style="height: 100px;">
+                    <i id="shopIcon" class="shop-icon fas fa-lg fa-shopping-cart" style="font-size: 100px; margin-top: 15px; margin-block: 12px;"></i> <br>
+                    <span style="font-size: 24px;">Shop</span>
                 </div>
-                <div class="content">
-                    <h2><a href="running.php" class="redir-anchor">Running</a></h2>
-                    <p>
-                        Running is one of the best athletic activities! <br>
-                        It supports mental as well as physical health! <br>
-                        Leave it to us to calculate your calorie consumption! <br>
-                    </p>
-                </div>
-            </div>
+            </a>
         </div>
     </div>
-
 
     <script src="../bootstrap-5.1.1-dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarHover.js"></script>

@@ -282,6 +282,11 @@ h4 {
     transition-delay: 0.75s;
 }
 
+.products{
+    display: flex;
+    justify-content: space-evenly ;
+}
+
 
 @media only screen and (max-width: 600px) {
     .my-brand {
