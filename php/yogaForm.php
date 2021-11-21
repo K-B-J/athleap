@@ -203,12 +203,15 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="duration">Duration of exercise: </label>
-                <input type="text" id="duration" name="duration" class="form-control" value="<?php echo (isset($_POST['duration'])) ? $_POST['duration'] : ""; ?>">
+                <div class="input-group">
+                    <input type="text" id="duration" name="duration" class="form-control" value="<?php echo (isset($_POST['duration'])) ? $_POST['duration'] : ""; ?>">
+                    <span class="input-group-text" id="basic-addon2">minutes</span>
+                </div>
                 <?php
                 if ($durationErr != "") {
                     echo '<small id="durationHelp" class="form-text" style="color: #FF2226">' . $durationErr . '</small>';
                 } else {
-                    echo '<small id="durationHelp" class="form-text text-dark">in minutes</small>';
+                    echo '<small id="durationHelp" class="form-text text-dark"></small>';
                 }
                 ?>
             </div>

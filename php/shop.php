@@ -122,6 +122,9 @@
             </div>
             <a class="my-brand navbar-brand" href="">Shop</a>
             <div style="flex:1;"></div>
+            <div style="color: white;">
+                FCOINS: <?php echo $_SESSION["fcoins"]; ?>
+            </div>
             <div class="mr-3">
                 <div class="dropdown">
                     <button style="padding-right: 36px !important;" class="my-dropdown btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -134,6 +137,7 @@
             </div>
         </div>
     </nav>
+
 
     <div id="content1">
         <div class="container text-dark my-4">
@@ -166,11 +170,11 @@
                                                 <span>' . $item['price'] . 'FC</span>
                                             </div>
                                             <button class = "btn buy-btn"';
-                                            echo ($item["price"]>$fc)? "disabled":"";
-                                            echo '>
+                        echo ($item["price"] > $fc) ? "disabled" : "";
+                        echo '>
                                                 ';
-                                                echo ($item["price"]>$fc)? "Insufficient FC":'+ Buy now';
-                                            echo '</button>
+                        echo ($item["price"] > $fc) ? "Insufficient FC" : '+ Buy now';
+                        echo '</button>
                                         </div>
                                     </div>
                                 </div>
