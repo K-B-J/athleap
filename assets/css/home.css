@@ -64,29 +64,28 @@ body {
     box-shadow: none;
 }
 
-.content-row{
-    width: 100%;
-    display: grid;
-    align-content: space-around;
-    grid-auto-flow: column;
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.item {
+    border-radius: 20px;
+    box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    height: 200px;
+    margin: 12px 4px;
+}
+
+.item:hover {
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {
     .my-brand {
         display: none;
-    }
-    #nav-contents {
-        display: grid;
-        justify-content: center;
-    }
-
-    .content-row{
-        display: grid;
-        align-content: space-around;
-        grid-auto-flow: row;
-    }
-
-    .content-div{
-        margin-bottom: 40px;
     }
 }

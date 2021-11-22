@@ -100,7 +100,7 @@
         </div>
     </nav>
 
-    <div class="container-fluid my-3">
+    <div class="container-fluid my-4">
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -148,36 +148,36 @@
         </div>
     </div>
 
-    <div class="content-row text-center">
-        <div class="content-div">
-            <a class="nav-link" href="yoga.php">
+    <div class="container text-center my-5">
+        <div class="item" onmouseover="yoga_hover2();" onmouseout="yoga_unhover2();">
+            <a class="nav-link" href="yoga.php" style="padding-top:36px; padding-bottom:64px;">
                 <div style="height: 100px;">
-                    <img id="yogaIcon" src="../assets/icons/Yoga.svg" alt="Yoga icon" style="line-height: 40px; height: 100px;"> <br>
-                    <span style="font-size: 24px;">Yoga</span>
+                    <img id="yogaIcon2" src="../assets/icons/Yoga.svg" alt="Yoga icon" style="height: 100px;"> <br>
+                    <span id="yogaName" style="font-size: 24px; padding-top:6px;">Yoga</span>
                 </div>
             </a>
         </div>
-        <div class="content-div">
-            <a class="nav-link" href="gym.php">
+        <div class="item" onmouseover="gym_hover2();" onmouseout="gym_unhover2();">
+            <a class="nav-link" href="gym.php" style="padding-top:36px; padding-bottom:64px;">
                 <div style="height: 100px;">
-                    <img id="gymIcon" src="../assets/icons/Gym.svg" alt="Gym icon" style="line-height: 40px; height: 100px;"> <br>
-                    <span style="font-size: 24px;">Gym</span>
+                    <img id="gymIcon2" src="../assets/icons/Gym.svg" alt="Gym icon" style="height: 100px;"> <br>
+                    <span id="gymName" style="font-size: 24px; padding-top:6px;">Gym</span>
                 </div>
             </a>
         </div>
-        <div class="content-div">
-            <a class="nav-link" href="running.php">
+        <div class="item" onmouseover="running_hover2();" onmouseout="running_unhover2();">
+            <a class="nav-link" href="running.php" style="padding-top:36px; padding-bottom:64px;">
                 <div style="height: 100px;">
-                    <img id="runningIcon" src="../assets/icons/Running.svg" alt="Running icon" style="line-height: 40px; height: 100px;"> <br>
-                    <span style="font-size: 24px;">Running</span>
+                    <img id="runningIcon2" src="../assets/icons/Running.svg" alt="Running icon" style="height: 100px;"> <br>
+                    <span id="runningName" style="font-size: 24px; padding-top:6px;">Running</span>
                 </div>
             </a>
         </div>
-        <div class="content-div">
-            <a class="nav-link" href="shop.php">
+        <div class="item" onmouseover="shop_hover2();" onmouseout="shop_unhover2();">
+            <a class="nav-link" href="shop.php" style="padding-top:36px; padding-bottom:64px;">
                 <div style="height: 100px;">
-                    <i id="shopIcon" class="shop-icon fas fa-lg fa-shopping-cart" style="font-size: 100px; margin-top: 15px; margin-block: 12px;"></i> <br>
-                    <span style="font-size: 24px;">Shop</span>
+                    <i id="shopIcon2" class="shop-icon fas fa-lg fa-shopping-cart" style="font-size: 100px; margin-top: 15px; margin-block: 12px;"></i> <br>
+                    <span id="shopName" style="font-size: 24px; padding-top:6px;">Shop</span>
                 </div>
             </a>
         </div>
