@@ -245,14 +245,7 @@ h4 {
     transition-delay: 0.75s;
 }
 
-.shop-item {
-    margin-right: 3rem;
-    margin-left: 3rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-
-.buy-btn{
+.buy-btn {
     display: inline-block;
     padding: 10px 20px;
     background: #ffffff;
@@ -271,7 +264,7 @@ h4 {
     transition-delay: 0s;
 }
 
-.buy-btn:disabled{
+.buy-btn:disabled {
     background-color: gray;
     color: black;
 }
@@ -282,21 +275,24 @@ h4 {
     transition-delay: 0.75s;
 }
 
-.products{
+.products {
     display: flex;
-    justify-content: space-evenly ;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
+.item {
+    max-width: 344px;
+    margin: 12px 4px;
+}
 
 @media only screen and (max-width: 600px) {
     .my-brand {
         display: none;
     }
+
     .products {
-        display: grid;
-        justify-content: center;
-    }
-    .shop-item {
-        margin-left: 2%;
+        flex-direction: column;
     }
 }

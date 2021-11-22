@@ -23,7 +23,6 @@
 </head>
 
 <body class="bg-dark">
-
     <?php
     session_start();
     if (!isset($_SESSION["email"])) {
@@ -141,48 +140,38 @@
 
     <div id="content1">
         <div class="container text-dark my-4">
-            <div id="catalog my-5">
-                &nbsp;
+            <div id="catalog">
                 <div class="row text-light products">
                     <?php
-
                     foreach ($shopItems as $item) {
-                        echo '
-                            <div class="col-3 shop-item">
-                                <div class="content">
-                                    <div class="card">
-                                        <div class="imgBx">
-                                            <img src="' . $item["image"] . '" alt="">
-                                        </div>
-                                        <div class="contentBx">
-                                            <h2>' . $item["title"] . '</h2>
-                                            <div class="size">
-                                                <h3>Size :</h3>
-                                                ';
-
-                        foreach ($item['sizes'] as $i) {
-                            echo "<span>" . $i . "</span>";
-                        };
-
-                        echo '</div>
-                                            <div class="price">
-                                                <h3>Price :</h3>
-                                                <span>' . $item['price'] . 'FC</span>
+                        echo '<div class="item">
+                                    <div class="content">
+                                        <div class="card">
+                                            <div class="imgBx">
+                                                <img src="' . $item["image"] . '" alt="">
                                             </div>
-                                            <button class = "btn buy-btn"';
-                        echo ($item["price"] > $fc) ? "disabled" : "";
-                        echo '>
-                                                ';
+                                            <div class="contentBx">
+                                                <h2>' . $item["title"] . '</h2>
+                                                <div class="size">
+                                                    <h3>Size :</h3>';
+                        foreach ($item['sizes'] as $i) {
+                            echo "                  <span>" . $i . "</span>";
+                        }
+                        echo '                  </div>
+                                                <div class="price">
+                                                    <h3>Price :</h3>
+                                                    <span>' . $item['price'] . 'FC</span>
+                                                </div>
+                                                <button class = "btn buy-btn"';
+                        echo ($item["price"] > $fc) ? "disabled>" : ">";
                         echo ($item["price"] > $fc) ? "Insufficient FC" : '+ Buy now';
-                        echo '</button>
+                        echo '                  </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             ';
                     }
-
-
                     ?>
                 </div>
                 <br>
