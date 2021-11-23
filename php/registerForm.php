@@ -25,6 +25,11 @@
 
 <body>
     <?php
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
     session_start();
     if (isset($_SESSION["email"])) {
         header("Location: index.php");
@@ -112,6 +117,21 @@
                 $dob = substr($dob, 8, 2) . "/" . substr($dob, 5, 2) . "/" . substr($dob, 0, 4);
                 $collection->insertOne(["email" => $email, "password" => $password, "name" => $name, "phone" => $phone, "dob" => $dob, "height" => $height, "weight" => $weight, "gender" => $gender, "fcoins" => 0]);
                 $_SESSION["registered"] = true;
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->SMTPAuth = true;
+                $mail->SMTPSecure = 'tls';
+                $mail->SMTPAutoTLS = false;
+                $mail->Host = 'smtp.gmail.com';
+                $mail->Username = getenv("EMAIL_USERNAME");
+                $mail->Password = getenv("EMAIL_PASSWORD");
+                $mail->Port = 587;
+                $mail->setFrom('athleapfitness@gmail.com', 'Athleap No Reply');
+                $mail->addAddress($email);
+                $mail->isHTML(true);
+                $mail->Subject = 'Athleap: Registered successfully!';
+                $mail->Body = file_get_contents("../html/registeredEmail.html");
+                $mail->send();
                 header("Location: index.php");
             } else {
                 $error_email = "The following email is already registered!";

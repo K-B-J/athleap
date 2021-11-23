@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Athleap: Result</title>
-    <link rel="icon" type="image/png" href="../assets/icons/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" href="../assets/icons/favicon-32x32.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
     if (!isset($_SESSION["email"])) {
         header("Location: index.php");
     }
-    if (!isset($_SESSION["calories"])){
+    if (!isset($_SESSION["calories"])) {
         header("Location: home.php");
     }
     ?>
@@ -112,12 +112,38 @@
             <h2>Congratulations!</h2>
             <p>You burned</p>
             <?php
+
+            use PHPMailer\PHPMailer\PHPMailer;
+            use PHPMailer\PHPMailer\SMTP;
+            use PHPMailer\PHPMailer\Exception;
+
             $calories = $_SESSION["calories"];
             $fcoins = $_SESSION["excercise_fcoins"];
             unset($_SESSION["calories"]);
             unset($_SESSION["excercise_fcoins"]);
             echo "<h1>$calories Calories</h1>";
-            echo "<h2>$fcoins FCoins Earned!</h2>"
+            echo "<h2>$fcoins FCoins Earned!</h2>";
+            $email = $_SESSION["email"];
+            require '../vendor/autoload.php';
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'tls';
+            $mail->SMTPAutoTLS = false;
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Username = getenv("EMAIL_USERNAME");
+            $mail->Password = getenv("EMAIL_PASSWORD");
+            $mail->Port = 587;
+            $mail->setFrom('athleapfitness@gmail.com', 'Athleap No Reply');
+            $mail->addAddress($email);
+            $mail->isHTML(true);
+            $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+            $date = $date->format('d/m/Y H:i:s a');
+            $mail->Subject = 'Athleap: Activity Report (' . $date . ')';
+            $mail->Body = file_get_contents("../html/afterFormEmail.html");
+            $mail->Body = str_replace("our_calories", $calories, $mail->Body);
+            $mail->Body = str_replace("our_fcoins", $fcoins, $mail->Body);
+            $mail->send();
             ?>
         </div>
     </div>
