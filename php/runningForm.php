@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Athleap: Running Form</title>
+    <link rel="icon" type="image/png" href="../assets/icons/favicon-32x32.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
@@ -82,14 +83,12 @@
             $weight = $_SESSION["weight"];
             $height = $_SESSION["height"];
             $old_fcoins = $_SESSION["fcoins"];
+            $bmi = $weight / (($height / 100) ** 2);
+            $calories = calorie_calculator($age, $bmi, $distance, $elevation, $time, $energy);
             require '../vendor/autoload.php';
             $ATLAS_CREDENTIALS = getenv("ATLAS_CREDENTIALS");
             $connection = new MongoDB\Client($ATLAS_CREDENTIALS);
             $db = $connection->Athleap;
-            // $collection = $db->Users;
-            // $result = $collection->find(["email" => $email])->toArray();
-            $bmi = $weight / (($height / 100) ** 2);
-            $calories = calorie_calculator($age, $bmi, $distance, $elevation, $time, $energy);
             $collection = $db->Running;
             $result = $collection->find(["email" => $email])->toArray();
             $fcoins = fcoins_calculator($age, $calories, $result[sizeof($result) - 1]["fcoins"]);

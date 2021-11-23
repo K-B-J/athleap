@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Athleap: Gym Form</title>
+    <link rel="icon" type="image/png" href="../assets/icons/favicon-32x32.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
@@ -67,23 +68,6 @@
             $error = true;
         }
         if (!$error) {
-            // function age_calculator($dob)
-            // {
-            //     date_default_timezone_set("Indian/Mahe");
-            //     $today = date("d/m/Y");
-            //     $today_day = (int)substr($today, 0, 2);
-            //     $today_month = (int)substr($today, 3, 2);
-            //     $today_year = (int)substr($today, 6, 4);
-            //     $year = (int)substr($dob, 6, 4);
-            //     $month = (int)substr($dob, 3, 2);
-            //     $day = (int)substr($dob, 0, 2);
-            //     if (($today_month > $month) || (($today_month == $month) && ($today_day >= $day))) {
-            //         $age = $today_year - $year;
-            //     } else {
-            //         $age = $today_year - $year - 1;
-            //     }
-            //     return $age;
-            // }
             function calorie_calculator($age, $bmi, $sets, $reps, $dumbbell_weight, $time, $energy)
             {
                 if ($energy == 0) {
@@ -115,14 +99,12 @@
             $weight = $_SESSION["weight"];
             $height = $_SESSION["height"];
             $old_fcoins = $_SESSION["fcoins"];
+            $bmi = $weight / (($height / 100) ** 2);
+            $calories = calorie_calculator($age, $bmi, $sets, $reps, $dumbbell_weight, $time, $energy);
             require '../vendor/autoload.php';
             $ATLAS_CREDENTIALS = getenv("ATLAS_CREDENTIALS");
             $connection = new MongoDB\Client($ATLAS_CREDENTIALS);
             $db = $connection->Athleap;
-            // $collection = $db->Users;
-            // $result = $collection->find(["email" => $email])->toArray();
-            $bmi = $weight / (($height / 100) ** 2);
-            $calories = calorie_calculator($age, $bmi, $sets, $reps, $dumbbell_weight, $time, $energy);
             $collection = $db->Gym;
             $result = $collection->find(["email" => $email])->toArray();
             $fcoins = fcoins_calculator($age, $calories, $result[sizeof($result) - 1]["fcoins"]);
