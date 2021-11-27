@@ -59,16 +59,16 @@
             function calorie_calculator($wt, $yoga, $dur)
             {
                 $met = 0;
-                if ($yoga = "Nadisodhana") {
+                if ($yoga == "Nadisodhana") {
                     $met = 2;
-                } else if ($yoga = "Hatha") {
+                } else if ($yoga == "Hatha") {
                     $met = 2.5;
-                } else if ($yoga = "Surya Namaskar") {
+                } else if ($yoga == "Surya Namaskar") {
                     $met = 3.3;
                 } else {
                     $met = 4;
                 }
-                return ($met * $wt * 3.5) / 200;
+                return (($met * $wt * 3.5) / 200)*$dur;
             }
 
             function fcoins_calculator($age, $calories, $previous_fcoins)
@@ -105,7 +105,6 @@
             $new_fcoins = $old_fcoins + $fcoins;
             $_SESSION["fcoins"] = $new_fcoins;
             $collection->updateOne(["email" => $email], ['$set' => ["fcoins" => $new_fcoins]]);
-            $calories = $calories*100;
             $_SESSION["calories"] = $calories;
             $_SESSION["excercise_fcoins"] = $fcoins;
             $collection = $db->Yoga;
