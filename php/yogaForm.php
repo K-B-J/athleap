@@ -73,7 +73,7 @@
 
             function fcoins_calculator($age, $calories, $previous_fcoins)
             {
-                $fcoins = ($calories/4) + (int)floor(($age / 10));
+                $fcoins = ($calories/80) + (int)floor(($age / 10));
                 if ($fcoins > $previous_fcoins) {
                     $fcoins += 1;
                 }
