@@ -184,6 +184,7 @@
                         <?php echo $_SESSION["name"]; ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="editProfile.php">Edit Profile</a>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </div>

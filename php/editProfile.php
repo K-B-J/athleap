@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Athleap: Yoga Form</title>
+    <title>Athleap: Edit Profile</title>
     <link rel="icon" type="image/png" href="../assets/icons/favicon-32x32.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <link href="../bootstrap-5.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="../assets/css/yogaForm.css" rel="stylesheet">
+    <link href="../assets/css/editProfile.css" rel="stylesheet">
     <link rel="preload" as="image" href="../assets/icons/Home.svg">
     <link rel="preload" as="image" href="../assets/icons/Home selected.svg">
     <link rel="preload" as="image" href="../assets/icons/Yoga.svg">
@@ -29,86 +29,48 @@
     if (!isset($_SESSION["email"])) {
         header("Location: index.php");
     }
-    $durationErr = "";
-    $yogaErr = "";
-    $duration = "";
-    $rating = "";
-    $yoga = "";
-
+    require '../vendor/autoload.php';
+    $ATLAS_CREDENTIALS = getenv("ATLAS_CREDENTIALS");
+    $connection = new MongoDB\Client($ATLAS_CREDENTIALS);
+    $db = $connection->Athleap;
+    $collection = $db->Users;
+    $email = $_SESSION["email"];
+    $result = $collection->find(["email" => $email])->toArray();
+    $name = $result[0]["name"];
+    $phone = $result[0]["phone"];
+    $dob = $result[0]["dob"];
+    $gender = $result[0]["gender"];
+    $height = $result[0]["height"];
+    $weight = $result[0]["weight"];
+    $error_height = "";
+    $error_weight = "";
+    $error_password = "";
     if (isset($_POST["save"])) {
-        $duration = $_POST["duration"];
-        $rating = $_POST["exerciseRate"];
-
-        if (empty($_POST["duration"])) {
-            $durationErr = "Duration cannot be empty";
-        } else if (preg_match("/^[a-zA-Z]*$/", $_POST["duration"])) {
-            $durationErr = "Duration cannot be letter";
-        } else if ((int)($_POST["duration"]) <= 0) {
-            $durationErr = "Duration should be greater than 0";
-        } else {
-            $duration = $_POST["duration"];
+        $height = $_POST["height"];
+        $weight = $_POST["weight"];
+        $password = $_POST["password"];
+        $confirmPassword = $_POST["confirm-password"];
+        $error = false;
+        if ($height <= 0) {
+            $error_height = "That can't be your height! :O";
+            $error = true;
         }
-        if (empty($_POST["yogaAsan"])) {
-            $yogaErr = "Please select an Asana";
-        } else {
-            $yoga = $_POST["yogaAsan"];
+        if ($weight <= 0) {
+            $error_weight = "That can't be your weight! :O";
+            $error = true;
         }
-
-        if ($durationErr == "" && $yogaErr == "") {
-
-            function calorie_calculator($wt, $yoga, $dur)
-            {
-                $met = 0;
-                if ($yoga == "Nadisodhana") {
-                    $met = 2;
-                } else if ($yoga == "Hatha") {
-                    $met = 2.5;
-                } else if ($yoga == "Surya Namaskar") {
-                    $met = 3.3;
-                } else {
-                    $met = 4;
-                }
-                return (($met * $wt * 3.5) / 200) * $dur;
+        if ((($password != "") || ($confirmPassword != "")) && ($password != $confirmPassword)) {
+            $error_password = "Passwords don't match!";
+            $error = true;
+        }
+        if (!$error) {
+            $collection->updateOne(["email" => $email], ['$set' => ["height" => $height]]);
+            $collection->updateOne(["email" => $email], ['$set' => ["weight" => $weight]]);
+            if ($password !=""){
+                $collection->updateOne(["email" => $email], ['$set' => ["password" => $password]]);
             }
-
-            function fcoins_calculator($age, $calories, $previous_fcoins)
-            {
-                $fcoins = ($calories / 80) + (int)floor(($age / 10));
-                if ($fcoins > $previous_fcoins) {
-                    $fcoins += 1;
-                }
-                return floor($fcoins);
-            }
-
-            date_default_timezone_set("Indian/Mahe");
-            $email = $_SESSION["email"];
-            $age = $_SESSION["age"];
-            $weight = $_SESSION["weight"];
-            $old_fcoins = $_SESSION["fcoins"];
-            date_default_timezone_set("Indian/Mahe");
-            $date = date("d/m/Y");
-
-            require '../vendor/autoload.php';
-            $ATLAS_CREDENTIALS = getenv("ATLAS_CREDENTIALS");
-            $connection = new MongoDB\Client($ATLAS_CREDENTIALS);
-            $db = $connection->Athleap;
-            $calories = calorie_calculator($weight, $yoga, $duration);
-            $collection = $db->Yoga;
-            $result = $collection->find(["email" => $email])->toArray();
-            if (sizeof($result) > 0) {
-                $fcoins = fcoins_calculator($age, $calories, $result[sizeof($result) - 1]["fcoins"]);
-            } else {
-                $fcoins = fcoins_calculator($age, $calories, 0);
-            }
-            $collection = $db->Users;
-            $new_fcoins = $old_fcoins + $fcoins;
-            $_SESSION["fcoins"] = $new_fcoins;
-            $collection->updateOne(["email" => $email], ['$set' => ["fcoins" => $new_fcoins]]);
-            $_SESSION["calories"] = $calories;
-            $_SESSION["excercise_fcoins"] = $fcoins;
-            $collection = $db->Yoga;
-            $collection->insertOne(["email" => $email, "date" => $date, "calories" => $calories, "fcoins" => $fcoins, "yoga" => $yoga, "duration" => $duration, "energy" => $rating]);
-            header("Location: afterForm.php");
+            $_SESSION["updated"] = true;
+            header("Location: home.php");
         }
     }
     ?>
@@ -119,7 +81,7 @@
             </button>
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: #707070;">Today's Workout</h5>
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: #707070;">Home</h5>
                     <button type="button" class="btn-close text-reset shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <hr class="sidebar-divider" style="color:#707070; margin: 6px 12px;">
@@ -168,7 +130,7 @@
                     </ul>
                 </div>
             </div>
-            <a class="my-brand navbar-brand" href="">Today's Workout</a>
+            <a class="my-brand navbar-brand" href="">Edit Profile</a>
             <div style="flex:1;"></div>
             <div class="mr-3">
                 <div class="dropdown">
@@ -176,7 +138,7 @@
                         <?php echo $_SESSION["name"]; ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="editProfile.php">Edit Profile</a>
+                        <a class="dropdown-item" href="">Edit Profile</a>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </div>
@@ -185,52 +147,82 @@
     </nav>
 
     <div class="form-container my-5">
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
             <div class="mb-3">
-                <label class="form-label" for="yogaAsan">Select Yoga Asan: </label>
-                <select class="form-select" name="yogaAsan">
-                    <option value="" <?php echo (isset($_POST['yogaAsan']) && $_POST['yogaAsan'] == "") ? "SELECTED" : ""; ?>>SELECT</option>
-                    <option value="Nadisodhana" <?php echo (isset($_POST['yogaAsan']) && $_POST['yogaAsan'] == "Nadisodhana") ? "SELECTED" : ""; ?>>Nadisodhana</option>
-                    <option value="Hatha" <?php echo (isset($_POST['yogaAsan']) && $_POST['yogaAsan'] == "Hatha") ? "SELECTED" : ""; ?>>Hatha</option>
-                    <option value="Surya Namaskar" <?php echo (isset($_POST['yogaAsan']) && $_POST['yogaAsan'] == "Surya Namaskar") ? "SELECTED" : ""; ?>>Surya Namaskar</option>
-                    <option value="Power Yoga" <?php echo (isset($_POST['yogaAsan']) && $_POST['yogaAsan'] == "Power Yoga") ? "SELECTED" : ""; ?>>Power Yoga</option>
-                </select>
-                <?php
-                if ($durationErr != "") {
-                    echo '<small id="durationHelp" class="form-text" style="color: #FF2226">' . $yogaErr . '</small>';
-                }
-                ?>
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" name="name" id="name" class="form-control" value="<?php echo $name; ?>" disabled required>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="duration">Duration of exercise: </label>
+                <label for="phone" class="form-label">Phone number:</label>
+                <input type="number" name="phone" id="phone" class="form-control" value="<?php echo $phone; ?>" disabled required>
+            </div>
+            <div class="mb-3">
+                <label for="dob" class="form-label">Date of Birth:</label>
+                <input type="text" name="dob" id="dob" class="form-control" value="<?php echo $dob; ?>" disabled required>
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender:</label>
                 <div class="input-group">
-                    <input type="text" id="duration" name="duration" class="form-control" value="<?php echo (isset($_POST['duration'])) ? $_POST['duration'] : ""; ?>">
-                    <span class="input-group-text" id="basic-addon2">minutes</span>
-                </div>
-                <?php
-                if ($durationErr != "") {
-                    echo '<small id="durationHelp" class="form-text" style="color: #FF2226">' . $durationErr . '</small>';
-                } else {
-                    echo '<small id="durationHelp" class="form-text text-dark"></small>';
-                }
-                ?>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="exerciseRate">Rate your Exercise: </label>
-                <div>
-                    <div class="row">
-                        <div class="col-1">
-                            0
-                        </div>
-                        <div class="col-10">
-                            <input type="range" class="form-range" min="0" max="5" step="1" id="exerciseRate" name="exerciseRate">
-                        </div>
-                        <div class="col-1">
-                            5
-                        </div>
+                    <div class="form-check me-5">
+                        <input class="form-check-input" type="radio" name="gender" id="gender1" value="male" <?php echo ($gender == 'male') ? 'checked="checked"' : ''; ?> disabled>
+                        <label class="form-check-label" for="gender1">
+                            Male
+                        </label>
+                    </div>
+                    <div class="form-check me-5">
+                        <input class="form-check-input" type="radio" name="gender" id="gender2" value="female" <?php echo ($gender == 'female') ? 'checked="checked"' : ''; ?> disabled>
+                        <label class="form-check-label" for="gender2">
+                            Female
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="gender3" value="other" <?php echo ($gender == 'other') ? 'checked="checked"' : ''; ?> disabled>
+                        <label class="form-check-label" for="gender3">
+                            Other
+                        </label>
                     </div>
                 </div>
             </div>
+            <div class="mb-3">
+                <label for="height" class="form-label">Height:</label>
+                <div class="input-group">
+                    <input type="number" name="height" id="height" class="form-control" value="<?php echo $height; ?>" required>
+                    <span class="input-group-text" id="basic-addon2">cm</span>
+                </div>
+            </div>
+            <?php
+            if ($error_height != "") {
+                echo "<p class='small invalid-input'>" . $error_height . "</p>";
+            }
+            ?>
+            <div class="mb-3">
+                <label for="weight" class="form-label">Weight:</label>
+                <div class="input-group">
+                    <input type="number" name="weight" id="weight" class="form-control" value="<?php echo $weight; ?>" required>
+                    <span class="input-group-text" id="basic-addon2">kg</span>
+                </div>
+            </div>
+            <?php
+            if ($error_weight != "") {
+                echo "<p class='small invalid-input'>" . $error_weight . "</p>";
+            }
+            ?>
+            <div class="my-4">
+                <h6 style="color:#FA9B70">Enter new password below only if you want to change your password, else these fields below can be left empty.</h6>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">New Password:</label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="confirm-password" class="form-label">Confirm New Password:</label>
+                <input type="password" name="confirm-password" id="confirm-password" class="form-control">
+            </div>
+            <?php
+            if ($error_password != "") {
+                echo "<p class='small invalid-input'>" . $error_password . "</p>";
+            }
+            ?>
             <div class="submission">
                 <button type="submit" class="submit" name="save">Save</button>
             </div>

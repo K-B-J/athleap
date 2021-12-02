@@ -29,6 +29,10 @@
     if (!isset($_SESSION["email"])) {
         header("Location: index.php");
     }
+    if (isset($_SESSION["updated"])) {
+        unset($_SESSION["updated"]);
+        echo "<script>alert('Profile Updated Successfully!')</script>";
+    }
     ?>
     <nav class="navbar my-navbar">
         <div class="container-fluid" style="justify-content: unset;">
@@ -94,6 +98,7 @@
                         <?php echo $_SESSION["name"]; ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="editProfile.php">Edit Profile</a>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </div>
