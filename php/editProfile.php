@@ -66,7 +66,7 @@
         if (!$error) {
             $collection->updateOne(["email" => $email], ['$set' => ["height" => $height]]);
             $collection->updateOne(["email" => $email], ['$set' => ["weight" => $weight]]);
-            if ($password !=""){
+            if ($password != "") {
                 $collection->updateOne(["email" => $email], ['$set' => ["password" => $password]]);
             }
             $_SESSION["updated"] = true;
@@ -81,7 +81,7 @@
             </button>
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: #707070;">Home</h5>
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: #707070;">Edit Profile</h5>
                     <button type="button" class="btn-close text-reset shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <hr class="sidebar-divider" style="color:#707070; margin: 6px 12px;">
