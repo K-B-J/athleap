@@ -1,8 +1,8 @@
 # ATHLEAP
 
 This is a project made by [Kevin Joshi](https://github.com/KevinJ-hub) & [Kaushal Binjola](https://github.com/KaushalBinjola).  
-It is hosted on [Heroku](https://www.heroku.com), you can check it out [here](https://athleap.herokuapp.com). Database used is MongoDB which is hosted on [MongoDB Atlas](https://www.mongodb.com/atlas/database) and various dependencies like [PHPMailer](https://github.com/PHPMailer/PHPMailer) & [Confetti JS](https://github.com/Agezao/confetti-js) have been used.  
-It is a php based web app that can help you track the amount of calories you have burnt in majorly three types of fitness activities which are Gym, Yoga and Running. You will also be awarded with FCoins (Fitness Coins) based on your performance which then can be used to claim prizes from the shop.  
+It is hosted on [Heroku](https://www.heroku.com), you can check it out [here](https://athleap.herokuapp.com). Database used is MongoDB which is hosted on [MongoDB Atlas](https://www.mongodb.com/atlas/database) and various dependencies like [PHPMailer](https://github.com/PHPMailer/PHPMailer) ✉️ & [Confetti JS](https://github.com/Agezao/confetti-js) 🎊 have been used.  
+It is a **Php based web app** that can help you **track the amount of calories you have burnt** 🔥 in majorly three types of fitness activities which are Gym 🏋️, Yoga 🧘 and Running 🏃. You will also be awarded with FCoins 🪙 (Fitness Coins) based on your performance which then can be used to claim prizes 🎁 from the shop.  
 
 > **NOTE:** Since the app is hosted for free on heroku it goes to sleep on 30 mins of inactivity so there might be a possibility that the app takes a few seconds to load INITIALLY so please be patient.  
 
