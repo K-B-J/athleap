@@ -58,4 +58,3 @@ $ composer install
 | ![Mobile Login Page](screenshots/ss9.png) | ![Mobile Register Page](screenshots/ss10.png) | ![Mobile Home Page](screenshots/ss11.png) | ![Mobile Edit Profile Page](screenshots/ss12.png) |
 |---|---|---|---|
 | ![Mobile Shop Page](screenshots/ss13.png) | ![Mobile Running Records Page](screenshots/ss14.png) | ![Mobile Running Workout Details Page](screenshots/ss15.png) | ![Mobile Results Page](screenshots/ss16.png) |
-|---|---|---|---|
